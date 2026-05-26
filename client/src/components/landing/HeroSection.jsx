@@ -18,9 +18,10 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen bg-steel-900 overflow-hidden flex items-center justify-center pt-24 pb-16 font-body text-white">
-      
+
       {/* Self-contained custom animations styling */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes customFadeIn {
           from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
@@ -45,7 +46,7 @@ export default function HeroSection() {
 
       {/* Hero Content */}
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10 flex flex-col items-center">
-        
+
         {/* Subtle top banner chip */}
         <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-steel-800 border border-steel-600 text-xs font-mono font-semibold tracking-wider uppercase text-tata-gold mb-8 opacity-0 animate-hero-load shadow-inner">
           <span className="flex h-2 w-2 relative">
@@ -70,7 +71,7 @@ export default function HeroSection() {
 
         {/* Dual CTA Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 w-full sm:w-auto opacity-0 animate-hero-load animate-delay-2">
-          
+
           {/* Primary Call to Action */}
           <a
             href="#vendor-program"

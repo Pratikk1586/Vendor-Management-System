@@ -47,7 +47,7 @@ export default function SidebarItem({ item, collapsed, depth = 0 }) {
   };
 
   // Shared active styles for layout links
-  const activeClass = 'bg-tata-blue text-white font-semibold shadow-md shadow-tata-blue/20';
+  const activeClass = 'bg-gradient-to-r from-tata-blue to-tata-light text-white font-semibold shadow-md shadow-tata-blue/20';
   const inactiveClass = 'text-slate-300 hover:bg-steel-600 hover:text-white';
   const baseClass = `flex items-center w-full px-3 py-2.5 rounded-lg text-sm transition-all duration-200 group relative ${
     collapsed ? 'justify-center' : ''

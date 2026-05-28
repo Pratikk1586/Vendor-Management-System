@@ -47,7 +47,7 @@ function CountUp({ target, duration = 1500, trigger = false, decimals = 0, prefi
   };
 
   return (
-    <span className="font-mono font-bold text-3xl sm:text-4xl lg:text-5xl text-tata-gold">
+    <span className="font-mono font-bold text-3xl sm:text-4xl lg:text-5xl text-white">
       {prefix}
       {formatNumber(value)}
       {suffix}
@@ -85,19 +85,19 @@ export default function StatsStrip() {
   }, []);
 
   const stats = [
-    { target: 26, label: 'Countries', suffix: '+' },
-    { target: 50, label: 'Color Variants', suffix: '+' },
-    { target: 2.4, label: 'Revenue', prefix: '₹', suffix: 'L Cr', decimals: 1 },
-    { target: 75000, label: 'Employees', suffix: '+' },
+    { target: 400, label: 'Annual Capacity', suffix: 'K Tons' },
+    { target: 30, label: 'Color Shades', suffix: '+' },
+    { target: 4.2, label: 'Annual Revenue', prefix: '₹', suffix: 'K Cr', decimals: 1 },
+    { target: 1000, label: 'Dedicated Employees', suffix: '+' },
   ];
 
   return (
     <section
       ref={containerRef}
-      className="bg-steel-700 border-y border-steel-600/80 w-full relative z-10 font-body py-8 sm:py-10 shadow-inner"
+      className="bg-gradient-to-r from-tata-blue to-tata-light border-y border-blue-800 w-full relative z-10 font-body py-8 sm:py-10 shadow-inner"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 text-center divide-y md:divide-y-0 md:divide-x divide-steel-600/60">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-4 text-center divide-y md:divide-y-0 md:divide-x divide-blue-500/30">
           
           {stats.map((stat, index) => (
             <div
@@ -115,7 +115,7 @@ export default function StatsStrip() {
                   trigger={intersecting}
                 />
               </div>
-              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-slate-300">
+              <span className="text-xs sm:text-sm font-semibold uppercase tracking-wider text-blue-100">
                 {stat.label}
               </span>
             </div>

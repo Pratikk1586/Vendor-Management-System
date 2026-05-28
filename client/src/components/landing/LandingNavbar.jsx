@@ -6,7 +6,7 @@ import { useAuthStore } from '../../store/authStore';
 export default function LandingNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  
+
   const { isAuthenticated, role } = useAuthStore();
 
   // Track window scroll coordinates to apply background effects
@@ -59,27 +59,23 @@ export default function LandingNavbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 font-body text-white transition-all duration-300 ${
-        isScrolled
-          ? 'bg-steel-900/90 backdrop-blur-md shadow-xl border-b border-steel-700/50 py-3 sm:py-4'
-          : 'bg-steel-900/40 border-b border-transparent py-4 sm:py-5'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 font-body text-slate-800 transition-all duration-300 ${isScrolled
+        ? 'bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/80 py-3 sm:py-4'
+        : 'bg-white/60 backdrop-blur-sm border-b border-slate-200/40 py-4 sm:py-5'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          
+
           {/* Logo Brand Left */}
           <div className="flex-shrink-0 flex items-center">
             <Link to="/" className="flex items-center space-x-3 group">
-              <div className="w-9 h-9 bg-gradient-to-br from-tata-gold to-tata-amber rounded-lg flex items-center justify-center font-display text-lg text-steel-900 font-bold shadow-lg shadow-tata-gold/10 group-hover:scale-105 transition-transform duration-200">
+              <div className="w-9 h-9 bg-gradient-to-br from-tata-blue to-tata-light rounded-lg flex items-center justify-center font-display text-lg text-white font-bold shadow-lg shadow-tata-blue/15 group-hover:scale-105 transition-transform duration-200">
                 TS
               </div>
               <div className="flex flex-col">
-                <span className="font-display text-base tracking-wider text-white group-hover:text-tata-gold transition-colors duration-200 leading-none">
-                  TATA STEEL
-                </span>
-                <span className="text-[8px] uppercase font-mono tracking-widest text-slate-400 mt-0.5">
-                  Colors Portal
+                <span className="font-display text-base font-bold tracking-wider text-slate-900 group-hover:text-tata-blue transition-colors duration-200 leading-none">
+                  TATA STEEL COLORS
                 </span>
               </div>
             </Link>
@@ -92,7 +88,7 @@ export default function LandingNavbar() {
                 key={link.label}
                 href={link.path}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="text-sm font-medium tracking-wide text-slate-300 hover:text-tata-gold transition-colors duration-200 py-1"
+                className="text-sm font-medium tracking-wide text-slate-600 hover:text-tata-blue transition-colors duration-200 py-1"
               >
                 {link.label}
               </a>
@@ -113,7 +109,7 @@ export default function LandingNavbar() {
               <>
                 <Link
                   to="/login"
-                  className="inline-flex items-center px-4 py-2 rounded-lg text-xs font-semibold border border-slate-400 text-slate-200 hover:border-white hover:text-white hover:bg-white/5 transition-all duration-200"
+                  className="inline-flex items-center px-4 py-2 rounded-lg text-xs font-semibold border border-slate-300 text-slate-700 hover:border-tata-blue hover:text-tata-blue hover:bg-slate-50 transition-all duration-200"
                 >
                   <LogIn className="w-3.5 h-3.5 mr-1.5" />
                   Login
@@ -133,7 +129,7 @@ export default function LandingNavbar() {
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               type="button"
-              className="inline-flex items-center justify-center p-2 rounded-lg text-slate-400 hover:text-white hover:bg-steel-800 transition-colors focus:outline-none"
+              className="inline-flex items-center justify-center p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-none"
               aria-expanded={mobileMenuOpen}
             >
               <span className="sr-only">Open main menu</span>
@@ -145,20 +141,20 @@ export default function LandingNavbar() {
 
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-steel-900/95 backdrop-blur-md border-b border-steel-700 animate-fadeIn absolute left-0 right-0 z-40">
-          <div className="px-4 pt-2 pb-6 space-y-4 shadow-2xl">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 animate-fadeIn absolute left-0 right-0 z-40">
+          <div className="px-4 pt-2 pb-6 space-y-4 shadow-xl">
             {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.path}
                 onClick={(e) => handleLinkClick(e, link)}
-                className="block text-base font-medium px-3 py-2 rounded-md hover:bg-steel-800 hover:text-white transition-all text-slate-300"
+                className="block text-base font-medium px-3 py-2 rounded-md hover:bg-slate-100 hover:text-tata-blue transition-all text-slate-700"
               >
                 {link.label}
               </a>
             ))}
-            
-            <div className="pt-4 border-t border-steel-700 flex flex-col space-y-3 px-3">
+
+            <div className="pt-4 border-t border-slate-100 flex flex-col space-y-3 px-3">
               {isAuthenticated ? (
                 <Link
                   to={getDashboardPath()}
@@ -173,7 +169,7 @@ export default function LandingNavbar() {
                   <Link
                     to="/login"
                     onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg text-sm font-semibold border border-slate-400 text-slate-200 hover:bg-white/5 transition-all text-center"
+                    className="flex items-center justify-center w-full px-4 py-2.5 rounded-lg text-sm font-semibold border border-slate-300 text-slate-700 hover:bg-slate-50 transition-all text-center"
                   >
                     <LogIn className="w-4 h-4 mr-2" />
                     Login

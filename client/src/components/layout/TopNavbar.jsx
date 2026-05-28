@@ -84,7 +84,7 @@ export default function TopNavbar({ onMobileMenuToggle }) {
   };
 
   return (
-    <header className="bg-steel-800 border-b border-steel-600 h-16 sm:h-20 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-20 text-white font-body select-none">
+    <header className="bg-steel-800 border-b border-slate-200 h-16 sm:h-20 flex items-center justify-between px-4 sm:px-6 sticky top-0 z-20 text-slate-800 font-body select-none">
       
       {/* Left: Hamburger & Dynamic Breadcrumbs */}
       <div className="flex items-center space-x-4">
@@ -92,7 +92,7 @@ export default function TopNavbar({ onMobileMenuToggle }) {
         <button
           onClick={onMobileMenuToggle || toggleSidebar}
           type="button"
-          className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-steel-700 transition-colors focus:outline-none"
+          className="p-2 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-colors focus:outline-none"
           aria-label="Toggle navigation menu"
         >
           <Menu className="w-5 h-5 sm:w-6 h-6" />
@@ -110,7 +110,7 @@ export default function TopNavbar({ onMobileMenuToggle }) {
               ) : (
                 <Link
                   to={crumb.path}
-                  className="hover:text-slate-200 transition-colors duration-150 truncate max-w-[100px] md:max-w-[150px]"
+                  className="hover:text-slate-800 transition-colors duration-150 truncate max-w-[100px] md:max-w-[150px]"
                 >
                   {crumb.label}
                 </Link>
@@ -126,7 +126,7 @@ export default function TopNavbar({ onMobileMenuToggle }) {
         {/* Notification Bell Badge */}
         <Link
           to={getNotificationPath()}
-          className="p-2 sm:p-2.5 rounded-lg text-slate-400 hover:text-white hover:bg-steel-700 transition-all duration-150 relative group"
+          className="p-2 sm:p-2.5 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition-all duration-150 relative group"
           title="In-app notifications"
         >
           <Bell className="w-5 h-5 group-hover:scale-105 transition-transform" />
@@ -138,18 +138,18 @@ export default function TopNavbar({ onMobileMenuToggle }) {
         </Link>
 
         {/* Vertical Divider */}
-        <div className="w-px h-6 bg-steel-600"></div>
+        <div className="w-px h-6 bg-slate-200"></div>
 
         {/* User Account Settings Dropdown */}
         <div className="relative" ref={dropdownRef}>
           <button
             onClick={() => setDropdownOpen(!dropdownOpen)}
             type="button"
-            className="flex items-center space-x-2 sm:space-x-3 p-1.5 sm:p-2 rounded-lg hover:bg-steel-700 transition-all text-left focus:outline-none"
+            className="flex items-center space-x-2 sm:space-x-3 p-1.5 sm:p-2 rounded-lg hover:bg-slate-100 transition-all text-left focus:outline-none"
             aria-expanded={dropdownOpen}
             aria-haspopup="true"
           >
-            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-steel-600 border border-slate-500 flex items-center justify-center flex-shrink-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center flex-shrink-0">
               {user?.avatarUrl ? (
                 <img
                   src={user.avatarUrl}
@@ -162,7 +162,7 @@ export default function TopNavbar({ onMobileMenuToggle }) {
             </div>
             
             <div className="hidden md:flex flex-col select-none">
-              <span className="text-xs sm:text-sm font-semibold text-white truncate max-w-[120px]">
+              <span className="text-xs sm:text-sm font-semibold text-slate-800 truncate max-w-[120px]">
                 {user?.name || user?.username || 'Staff'}
               </span>
               <span className="text-[10px] text-slate-400 uppercase tracking-widest font-mono">
@@ -174,9 +174,9 @@ export default function TopNavbar({ onMobileMenuToggle }) {
 
           {/* User Account Menu Cards */}
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2.5 w-56 rounded-xl bg-steel-800 border border-steel-600 shadow-2xl overflow-hidden z-50 animate-slideDown">
-              <div className="p-3 bg-steel-900/40 border-b border-steel-600 flex md:hidden flex-col">
-                <span className="text-sm font-semibold text-white truncate">
+            <div className="absolute right-0 mt-2.5 w-56 rounded-xl bg-white border border-slate-200 shadow-2xl overflow-hidden z-50 animate-slideDown">
+              <div className="p-3 bg-slate-50 border-b border-slate-100 flex md:hidden flex-col">
+                <span className="text-sm font-semibold text-slate-800 truncate">
                   {user?.name || user?.username || 'Staff'}
                 </span>
                 <span className="text-xs text-tata-gold font-medium mt-0.5">
@@ -188,7 +188,7 @@ export default function TopNavbar({ onMobileMenuToggle }) {
                 <Link
                   to={getProfilePath()}
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center w-full px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-steel-700 hover:text-white transition-colors duration-150"
+                  className="flex items-center w-full px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition-colors duration-150"
                 >
                   <User className="w-4 h-4 mr-2.5 text-slate-400" />
                   My Profile
@@ -197,21 +197,21 @@ export default function TopNavbar({ onMobileMenuToggle }) {
                 <Link
                   to="/change-password"
                   onClick={() => setDropdownOpen(false)}
-                  className="flex items-center w-full px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:bg-steel-700 hover:text-white transition-colors duration-150"
+                  className="flex items-center w-full px-3 py-2.5 rounded-lg text-sm text-slate-600 hover:bg-slate-50 hover:text-slate-800 transition-colors duration-150"
                 >
                   <Key className="w-4 h-4 mr-2.5 text-slate-400" />
                   Change Password
                 </Link>
               </div>
 
-              <div className="p-1.5 border-t border-steel-600 bg-steel-900/20">
+              <div className="p-1.5 border-t border-slate-100 bg-slate-50">
                 <button
                   onClick={() => {
                     setDropdownOpen(false);
                     handleLogout();
                   }}
                   type="button"
-                  className="flex items-center w-full px-3 py-2.5 rounded-lg text-sm text-red-400 hover:bg-red-500/10 hover:text-red-300 transition-colors duration-150"
+                  className="flex items-center w-full px-3 py-2.5 rounded-lg text-sm text-red-500 hover:bg-red-50 hover:text-red-600 transition-colors duration-150"
                 >
                   <LogOut className="w-4 h-4 mr-2.5 text-red-400/80" />
                   Sign Out

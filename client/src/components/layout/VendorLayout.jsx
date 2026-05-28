@@ -55,7 +55,7 @@ export default function VendorLayout() {
   ];
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-steel-900 text-slate-100 font-body">
+    <div className="flex h-screen w-screen overflow-hidden bg-steel-900 text-slate-700 font-body">
       
       {/* Desktop Sidebar (hidden on mobile, visible on medium screens and up) */}
       <Sidebar navItems={vendorNavItems} />

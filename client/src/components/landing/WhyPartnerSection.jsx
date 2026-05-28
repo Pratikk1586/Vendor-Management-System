@@ -13,7 +13,7 @@ export default function WhyPartnerSection() {
     },
     {
       title: 'Priority Material Access',
-      desc: 'Direct mill-origin allocations of high-grade zinc-aluminium alloys, eliminating supply chain intermediaries.',
+      desc: 'Direct mill-origin allocations of high-grade ZINCALUME® and COLORBOND® steel alloys, eliminating supply chain intermediaries.',
       icon: Layers,
     },
     {
@@ -29,26 +29,26 @@ export default function WhyPartnerSection() {
   ];
 
   return (
-    <section className="bg-steel-900 text-slate-300 font-body py-20 sm:py-28 relative">
-      
+    <section className="bg-sky-950 text-slate-700 font-body py-20 sm:py-28 relative">
+
       {/* Background ambient light */}
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-tata-gold/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-blue-100/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Content */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-20 flex flex-col items-center">
-          <div className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-tata-gold mb-3">
-            <span className="w-6 h-px bg-tata-gold"></span>
-            <span>Why Choose Tata Steel</span>
+          <div className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-white mb-3">
+            <span className="w-6 h-px bg-white"></span>
+            <span>Why Choose Tata Steel Colors</span>
           </div>
-          
-          <h2 className="font-display text-4xl sm:text-6xl text-white tracking-wide uppercase leading-none mb-6">
+
+          <h2 className="font-display text-4xl sm:text-6xl text-blue-300 tracking-wide uppercase leading-none mb-6">
             Why Partner with Us
           </h2>
-          
-          <p className="text-sm sm:text-base text-slate-400 font-normal leading-relaxed">
-            Collaborating with Tata Steel Colors Division grants your enterprise elite status, reliable sourcing pipelines, and transparent, high-value commercial growth.
+
+          <p className="text-sm sm:text-base text-white font-normal leading-relaxed">
+            Collaborating with Tata Steel Colors grants your enterprise elite status, reliable sourcing pipelines, and transparent, high-value commercial growth.
           </p>
         </div>
 
@@ -59,19 +59,19 @@ export default function WhyPartnerSection() {
             return (
               <div
                 key={idx}
-                className="p-6 rounded-2xl bg-steel-800 border border-steel-700/60 shadow-xl flex flex-col space-y-4 hover:-translate-y-2 hover:shadow-2xl hover:border-tata-gold/45 transition-all duration-300 group"
+                className="p-6 rounded-2xl bg-white border border-slate-200 shadow-md flex flex-col space-y-4 hover:-translate-y-2 hover:shadow-xl hover:border-tata-blue/40 transition-all duration-300 group"
               >
                 {/* Icon Container with slight hover effect */}
-                <div className="w-12 h-12 rounded-xl bg-steel-700 border border-steel-600 flex items-center justify-center shadow-inner group-hover:bg-tata-gold/10 transition-colors">
-                  <IconComponent className="w-6 h-6 text-tata-gold group-hover:scale-105 transition-transform" />
+                <div className="w-12 h-12 rounded-xl bg-blue-50/60 border border-blue-100 flex items-center justify-center shadow-inner group-hover:bg-tata-blue/10 transition-colors">
+                  <IconComponent className="w-6 h-6 text-tata-blue group-hover:scale-105 transition-transform" />
                 </div>
 
                 {/* Card Title & Desc */}
-                <h3 className="text-base sm:text-lg font-bold text-white tracking-wide">
+                <h3 className="text-base sm:text-lg font-bold text-slate-900 tracking-wide">
                   {c.title}
                 </h3>
-                
-                <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+
+                <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
                   {c.desc}
                 </p>
               </div>

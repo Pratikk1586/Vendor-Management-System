@@ -51,25 +51,25 @@ export default function VendorTiersSection() {
   ];
 
   return (
-    <section className="bg-steel-800/20 text-slate-300 font-body py-20 sm:py-28 relative border-y border-steel-700/40">
-      
+    <section className="bg-sky-950 text-slate-700 font-body py-20 sm:py-28 relative border-y border-slate-100">
+
       {/* Background visual lights */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-tata-gold/5 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-100/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header content */}
         <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24 flex flex-col items-center">
-          <div className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-tata-gold mb-3">
-            <span className="w-6 h-px bg-tata-gold"></span>
+          <div className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-white mb-3">
+            <span className="w-6 h-px bg-white"></span>
             <span>Supplier Growth Framework</span>
           </div>
-          
-          <h2 className="font-display text-4xl sm:text-6xl text-white tracking-wide uppercase leading-none mb-6">
+
+          <h2 className="font-display text-4xl sm:text-6xl text-blue-300 tracking-wide uppercase leading-none mb-6">
             Vendor Classification Tiers
           </h2>
-          
-          <p className="text-sm sm:text-base text-slate-400 font-normal leading-relaxed">
+
+          <p className="text-sm sm:text-base text-white font-normal leading-relaxed">
             Authorized partners are categorized into performance-based commercial tiers. Achieve higher volumes, secure better terms, and gain exclusive procurement rights as you scale.
           </p>
         </div>
@@ -78,29 +78,36 @@ export default function VendorTiersSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 items-stretch pt-6">
           {tiers.map((t, idx) => {
             const Icon = t.badge;
+            // Map badge colors to clean light theme combinations
+            const getBadgeStyles = (name) => {
+              if (name.includes('Silver')) return 'text-slate-600 bg-slate-100';
+              if (name.includes('Gold')) return 'text-blue-600 bg-blue-50';
+              return 'text-tata-blue bg-blue-100';
+            };
+            const badgeClass = getBadgeStyles(t.name);
+
             return (
               <div
                 key={idx}
-                className={`rounded-2xl flex flex-col justify-between p-6 sm:p-8 relative transition-all duration-300 ${
-                  t.isPlatinum
-                    ? 'bg-steel-800 border-2 border-tata-gold md:-translate-y-4 shadow-[0_0_35px_rgba(200,150,12,0.25)] scale-100 md:scale-105 z-10'
-                    : 'bg-steel-800/60 border border-steel-700/80 hover:border-steel-600 shadow-xl'
-                }`}
+                className={`rounded-2xl flex flex-col justify-between p-6 sm:p-8 relative transition-all duration-300 ${t.isPlatinum
+                  ? 'bg-white border-2 border-tata-blue md:-translate-y-4 shadow-[0px_20px_207px_10px_rgba(236,_236,_243,_0.51)] scale-100 md:scale-105 z-10'
+                  : 'bg-white border border-slate-200 hover:border-blue-400 shadow-md'
+                  }`}
               >
                 {/* Platinum Highlight Ribbon */}
                 {t.isPlatinum && (
-                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-tata-gold to-tata-amber text-steel-900 font-mono text-[9px] font-bold uppercase tracking-widest rounded-full shadow-md">
+                  <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 px-3 py-1 bg-gradient-to-r from-tata-blue to-tata-light text-white font-mono text-[9px] font-bold uppercase tracking-widest rounded-full shadow-md">
                     Top Tier Partner
                   </span>
                 )}
 
                 {/* Card Title & Icon Header */}
                 <div>
-                  <div className="flex items-center justify-between border-b border-steel-700/60 pb-5 mb-6">
-                    <h3 className="text-xl font-bold text-white tracking-wide">
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-5 mb-6">
+                    <h3 className="text-xl font-bold text-slate-900 tracking-wide">
                       {t.name}
                     </h3>
-                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${t.badgeColor}`}>
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${badgeClass}`}>
                       <Icon className="w-5 h-5" />
                     </div>
                   </div>
@@ -108,21 +115,21 @@ export default function VendorTiersSection() {
                   {/* Pricing and Payment Comparison Specs */}
                   <div className="space-y-4 mb-8">
                     <div className="flex flex-col">
-                      <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400 leading-none">Bidding Capability</span>
-                      <span className="text-xl font-bold text-white mt-1.5">{t.biddingCap}</span>
+                      <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 leading-none">Bidding Capability</span>
+                      <span className="text-xl font-bold text-slate-900 mt-1.5">{t.biddingCap}</span>
                     </div>
-                    
+
                     <div className="flex flex-col">
-                      <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400 leading-none">Payment Disbursal Terms</span>
-                      <span className="text-base font-semibold text-tata-gold mt-1">{t.paymentTerms}</span>
+                      <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 leading-none">Payment Disbursal Terms</span>
+                      <span className="text-base font-semibold text-tata-blue mt-1">{t.paymentTerms}</span>
                     </div>
                   </div>
 
                   {/* Bulleted checklist */}
                   <ul className="space-y-3.5 mb-8">
                     {t.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start space-x-3 text-xs sm:text-sm text-slate-300">
-                        <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${t.isPlatinum ? 'text-tata-gold' : 'text-slate-400'}`} />
+                      <li key={fIdx} className="flex items-start space-x-3 text-xs sm:text-sm text-slate-600">
+                        <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${t.isPlatinum ? 'text-tata-blue' : 'text-slate-400'}`} />
                         <span className="leading-snug font-normal">{feature}</span>
                       </li>
                     ))}
@@ -130,7 +137,7 @@ export default function VendorTiersSection() {
                 </div>
 
                 {/* Card bottom details */}
-                <div className="pt-4 border-t border-steel-700/50 text-[10px] text-center uppercase tracking-widest font-mono text-slate-500">
+                <div className="pt-4 border-t border-slate-100 text-[10px] text-center uppercase tracking-widest font-mono text-slate-400">
                   Performance Assured
                 </div>
               </div>

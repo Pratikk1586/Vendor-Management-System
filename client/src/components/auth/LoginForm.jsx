@@ -4,6 +4,7 @@
 
 import { useState } from 'react';
 import { Eye, EyeOff, Lock, Mail, Loader2, AlertCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { ROLE_LABELS } from '../../constants/roles';
 
 export default function LoginForm({ role, onSubmit, loading, error }) {
@@ -30,14 +31,14 @@ export default function LoginForm({ role, onSubmit, loading, error }) {
   };
 
   return (
-    <div className="w-full bg-steel-800 border border-steel-700/60 rounded-2xl p-6 sm:p-8 shadow-2xl font-body">
+    <div className="w-full bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 shadow-xl font-body">
       
       {/* Header Info */}
       <div className="mb-6 text-center">
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
           Sign In to Portal
         </h2>
-        <p className="text-xs sm:text-sm text-slate-400 font-normal">
+        <p className="text-xs sm:text-sm text-slate-500 font-normal">
           Enter your login credentials below to access your account workspace.
         </p>
       </div>
@@ -54,11 +55,11 @@ export default function LoginForm({ role, onSubmit, loading, error }) {
         
         {/* Email Field */}
         <div>
-          <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">
+          <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
             Email Address
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <Mail className="w-4 h-4" />
             </div>
             <input
@@ -68,7 +69,7 @@ export default function LoginForm({ role, onSubmit, loading, error }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="e.g. name@company.com"
-              className="block w-full pl-10 pr-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors duration-150"
+              className="block w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-white focus:border-tata-blue transition-colors duration-150"
             />
           </div>
         </div>
@@ -76,18 +77,18 @@ export default function LoginForm({ role, onSubmit, loading, error }) {
         {/* Password Field */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-slate-300">
+            <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-slate-700">
               Password
             </label>
-            <a
-              href="/forgot-password"
-              className="text-xs text-tata-gold hover:text-tata-amber transition-colors font-medium"
+            <Link
+              to="/forgot-password"
+              className="text-xs text-tata-blue hover:text-tata-light transition-colors font-semibold"
             >
               Forgot Password?
-            </a>
+            </Link>
           </div>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
               <Lock className="w-4 h-4" />
             </div>
             <input
@@ -97,12 +98,12 @@ export default function LoginForm({ role, onSubmit, loading, error }) {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="block w-full pl-10 pr-10 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors duration-150"
+              className="block w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:bg-white focus:border-tata-blue transition-colors duration-150"
             />
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-500 hover:text-slate-300 focus:outline-none"
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none"
             >
               {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
             </button>
@@ -116,17 +117,17 @@ export default function LoginForm({ role, onSubmit, loading, error }) {
             type="checkbox"
             checked={rememberMe}
             onChange={(e) => setRememberMe(e.target.checked)}
-            className="h-4 w-4 rounded bg-steel-900 border-steel-700 text-tata-blue focus:ring-tata-blue/20 focus:ring-offset-0 focus:outline-none"
+            className="h-4 w-4 rounded bg-slate-50 border-slate-300 text-tata-blue focus:ring-tata-blue/20 focus:ring-offset-0 focus:outline-none"
           />
-          <label htmlFor="remember-me" className="ml-2.5 block text-xs sm:text-sm text-slate-400 select-none font-normal">
+          <label htmlFor="remember-me" className="ml-2.5 block text-xs sm:text-sm text-slate-600 select-none font-normal">
             Remember me on this machine
           </label>
         </div>
 
         {/* Error Alert Display Box */}
         {error && (
-          <div className="p-3 rounded-lg bg-red-950/40 border border-red-500/30 text-red-300 text-xs sm:text-sm flex items-start space-x-2.5 animate-fadeIn">
-            <AlertCircle className="w-4.5 h-4.5 text-red-400 flex-shrink-0 mt-0.5" />
+          <div className="p-3 rounded-lg bg-red-50 border border-red-200 text-red-600 text-xs sm:text-sm flex items-start space-x-2.5 animate-fadeIn">
+            <AlertCircle className="w-4.5 h-4.5 text-red-500 flex-shrink-0 mt-0.5" />
             <span className="leading-snug">{error}</span>
           </div>
         )}

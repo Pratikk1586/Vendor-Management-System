@@ -2,7 +2,6 @@
  * @fileoverview Public landing page assembling all Tata Steel Colors portal marketing and introductory sections.
  */
 
-import LandingNavbar from '../../components/landing/LandingNavbar';
 import HeroSection from '../../components/landing/HeroSection';
 import StatsStrip from '../../components/landing/StatsStrip';
 import AboutCompanySection from '../../components/landing/AboutCompanySection';
@@ -11,15 +10,11 @@ import VendorProgramSection from '../../components/landing/VendorProgramSection'
 import VendorTiersSection from '../../components/landing/VendorTiersSection';
 import HowBiddingWorks from '../../components/landing/HowBiddingWorks';
 import TestimonialsSection from '../../components/landing/TestimonialsSection';
-import Footer from '../../components/layout/Footer';
 import BackToTop from '../../components/common/BackToTop';
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-steel-900 text-slate-100 font-body relative overflow-x-hidden">
-      {/* Sticky Glassmorphic Navbar */}
-      <LandingNavbar />
-
       {/* Main content sections */}
       <main className="relative">
         <HeroSection />
@@ -27,13 +22,11 @@ export default function LandingPage() {
         <AboutCompanySection />
         <WhyPartnerSection />
         <VendorProgramSection />
-        <VendorTiersSection />
-        <HowBiddingWorks />
+        {/* <VendorTiersSection /> */}
+        {/* <HowBiddingWorks /> */}
         <TestimonialsSection />
       </main>
 
-      {/* Footer bar */}
-      <Footer />
 
       {/* Floating Scroll to Top button */}
       <BackToTop />

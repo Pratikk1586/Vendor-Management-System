@@ -3,7 +3,7 @@
  */
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import RoleSelector from '../../components/auth/RoleSelector';
 import LoginForm from '../../components/auth/LoginForm';
 import { useAuthStore } from '../../store/authStore';
@@ -106,9 +106,9 @@ export default function LoginPage() {
         {/* Account Onboarding Redirection */}
         <p className="text-sm text-center text-slate-400">
           Need a workspace profile?{' '}
-          <a href="/register" className="text-tata-gold hover:text-tata-amber font-semibold transition-colors">
+          <Link to="/register" className="text-tata-gold hover:text-tata-amber font-semibold transition-colors">
             Register for access
-          </a>
+          </Link>
         </p>
 
       </div>

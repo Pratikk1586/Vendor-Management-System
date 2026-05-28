@@ -65,13 +65,9 @@ import AnnouncementBanner from './components/common/AnnouncementBanner';
 export default function App() {
   return (
     <>
-      <AnnouncementBanner
-        message="System Update: Colors portal version 2.4.0 is now live. New structural packaging bidding rules are active."
-        type="info"
-      />
       <BrowserRouter>
         <Routes>
-          
+
           {/* PUBLIC ROUTING LAYER */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<LandingPage />} />
@@ -95,38 +91,29 @@ export default function App() {
             </Route>
           </Route>
 
-          {/* SECURE DEPARTMENT HEAD SOURCING PATHS (Supports double aliases) */}
+          {/* SECURE DEPARTMENT HEAD SOURCING PATHS */}
           <Route element={<DeptHeadRoute />}>
             <Route element={<DeptHeadLayout />}>
               {/* Dept dashboards */}
               <Route path="/dept/dashboard" element={<DeptDashboard />} />
-              <Route path="/dept-head/dashboard" element={<DeptDashboard />} />
-              
+
               {/* Vendor directory */}
               <Route path="/dept/vendors" element={<DeptVendors />} />
-              <Route path="/dept-head/vendors" element={<DeptVendors />} />
 
               {/* Tenders lists & builders */}
               <Route path="/dept/tenders" element={<DeptTenders />} />
-              <Route path="/dept-head/tenders" element={<DeptTenders />} />
               <Route path="/dept/tenders/create" element={<DeptTenderCreate />} />
-              <Route path="/dept-head/tenders/create" element={<DeptTenderCreate />} />
               <Route path="/dept/tenders/:id" element={<DeptTenderDetail />} />
-              <Route path="/dept-head/tenders/:id" element={<DeptTenderDetail />} />
 
               {/* Bid evaluation scoreboards */}
               <Route path="/dept/tenders/:id/bids" element={<DeptBidEvaluation />} />
-              <Route path="/dept-head/tenders/:id/bids" element={<DeptBidEvaluation />} />
               <Route path="/dept/bids" element={<DeptBidEvaluation />} />
-              <Route path="/dept-head/bids" element={<DeptBidEvaluation />} />
 
               {/* Sourcing contracts */}
               <Route path="/dept/contracts" element={<DeptContracts />} />
-              <Route path="/dept-head/contracts" element={<DeptContracts />} />
 
               {/* Reports */}
               <Route path="/dept/reports" element={<DeptReports />} />
-              <Route path="/dept-head/reports" element={<DeptReports />} />
             </Route>
           </Route>
 
@@ -134,28 +121,25 @@ export default function App() {
           <Route element={<AdminRoute />}>
             <Route element={<AdminLayout />}>
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              
+
               {/* Members & Approvals */}
-              <Route path="/admin/members" element={<AdminMembers />} />
               <Route path="/admin/members/all" element={<AdminMembers />} />
               <Route path="/admin/members/:id" element={<AdminMemberDetail />} />
-              <Route path="/admin/approvals" element={<AdminApprovals />} />
               <Route path="/admin/members/approvals" element={<AdminApprovals />} />
-              
+
               {/* Directories */}
               <Route path="/admin/vendors" element={<AdminVendors />} />
               <Route path="/admin/dept-heads" element={<AdminDeptHeads />} />
               <Route path="/admin/departments" element={<AdminDepartments />} />
-              
+
               {/* Oversights */}
               <Route path="/admin/tenders" element={<AdminTenders />} />
               <Route path="/admin/bids" element={<AdminBids />} />
               <Route path="/admin/contracts" element={<AdminContracts />} />
-              
+
               {/* Utilities & Configs */}
               <Route path="/admin/reports" element={<AdminReports />} />
               <Route path="/admin/audit-logs" element={<AdminAuditLog />} />
-              <Route path="/admin/audit-log" element={<AdminAuditLog />} />
               <Route path="/admin/auth-codes" element={<AdminAuthCodes />} />
               <Route path="/admin/settings" element={<AdminSettings />} />
             </Route>

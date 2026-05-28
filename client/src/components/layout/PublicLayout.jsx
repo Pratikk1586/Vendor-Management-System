@@ -8,7 +8,7 @@ import Footer from './Footer';
 
 export default function PublicLayout() {
   return (
-    <div className="flex flex-col min-h-screen bg-steel-900 text-slate-100 font-body">
+    <div className="flex flex-col min-h-screen bg-slate-50 text-slate-800 font-body">
       {/* Landing Top Navigation Bar */}
       <LandingNavbar />
 

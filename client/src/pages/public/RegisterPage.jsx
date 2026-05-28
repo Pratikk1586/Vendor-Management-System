@@ -3,13 +3,13 @@
  */
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import RoleSelector from '../../components/auth/RoleSelector';
 import VendorRegStep1 from '../../components/auth/vendor-reg/VendorRegStep1';
 import VendorRegStep2 from '../../components/auth/vendor-reg/VendorRegStep2';
 import VendorRegStep3 from '../../components/auth/vendor-reg/VendorRegStep3';
 import DeptHeadRegStep1 from '../../components/auth/depthead-reg/DeptHeadRegStep1';
 import DeptHeadRegStep2 from '../../components/auth/depthead-reg/DeptHeadRegStep2';
-import AdminRegForm from '../../components/auth/admin-reg/AdminRegForm';
 import StepProgress from '../../components/common/StepProgress';
 import { VENDOR, DEPT_HEAD, HR_ADMIN } from '../../constants/roles.js';
 
@@ -51,15 +51,6 @@ export default function RegisterPage() {
     departmentId: '',
   });
 
-  const [adminData, setAdminData] = useState({
-    fullName: '',
-    employeeId: '',
-    officialEmail: '',
-    mobileNumber: '',
-    designation: '',
-    authCode: '',
-  });
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -95,18 +86,6 @@ export default function RegisterPage() {
     setLoading(false);
   };
 
-  // Admin handlers
-  const handleAdminChange = (fields) => {
-    setAdminData((prev) => ({ ...prev, ...fields }));
-  };
-
-  const handleAdminSubmit = async () => {
-    setLoading(true);
-    setError('');
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setLoading(false);
-  };
-
   // Define steps for each flow to load into the step indicator
   const getFlowSteps = () => {
     switch (role) {
@@ -120,10 +99,6 @@ export default function RegisterPage() {
         return [
           { label: 'Profile' },
           { label: 'Verification' },
-        ];
-      case HR_ADMIN:
-        return [
-          { label: 'Form Credentials' },
         ];
       default:
         return [];
@@ -155,7 +130,7 @@ export default function RegisterPage() {
             <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">Section 1</span>
             <h3 className="text-sm font-semibold text-slate-300">Select registration profile</h3>
           </div>
-          <RoleSelector value={role} onChange={handleRoleChange} />
+          <RoleSelector value={role} onChange={handleRoleChange} excludeRoles={[HR_ADMIN]} />
         </div>
 
         {/* Step 2: Flow progress bar */}
@@ -219,23 +194,15 @@ export default function RegisterPage() {
             </>
           )}
 
-          {role === HR_ADMIN && (
-            <AdminRegForm
-              data={adminData}
-              onChange={handleAdminChange}
-              onSubmit={handleAdminSubmit}
-              loading={loading}
-              error={error}
-            />
-          )}
+
         </div>
 
         {/* Redirect back to Login Link */}
         <p className="text-sm text-center text-slate-400">
           Already have a portal profile?{' '}
-          <a href="/login" className="text-tata-gold hover:text-tata-amber font-semibold transition-colors">
+          <Link to="/login" className="text-tata-gold hover:text-tata-amber font-semibold transition-colors">
             Sign In here
-          </a>
+          </Link>
         </p>
 
       </div>

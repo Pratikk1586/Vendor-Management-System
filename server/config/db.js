@@ -2,55 +2,61 @@
  * @fileoverview Mongoose database connection with retry logic for the Tata Steel Colors API.
  */
 
-const mongoose = require('mongoose');
-const { logger } = require('./logger');
+const { Sequelize } = require('sequelize');
+const { logger } = require('./logger'); // Update path if needed
 
-const MAX_RETRIES = 5;
-const RETRY_DELAY_MS = 3000;
+const sequelize = new Sequelize(
+  process.env.DB_NAME || 'vendor_management_db',
+  process.env.DB_USER || 'root',
+  process.env.DB_PASSWORD || 'Chotu@1586',
+  {
+    host: process.env.DB_HOST || 'localhost',
+    dialect: 'mysql',
 
-/**
- * Attempts to connect to MongoDB with exponential backoff retries.
- * @param {number} [attempt=1] Current attempt number.
- * @returns {Promise<void>}
- */
-async function connectWithRetry(attempt = 1) {
-  const mongoUri = process.env.MONGO_URI;
+    pool: {
+      max: 10,
+      min: 0,
+      acquire: 30000,
+      idle: 10000,
+    },
 
-  if (!mongoUri) {
-    throw new Error('MONGO_URI is not defined in environment variables');
+    logging: (msg) => {
+      logger.info(msg);
+    },
   }
+);
 
+// Test database connection
+const connectDB = async () => {
   try {
-    await mongoose.connect(mongoUri);
-    logger.info('MongoDB connected successfully');
+    await sequelize.authenticate();
+    logger.info('MySQL database connected successfully');
+
+    // Register all Sequelize models to ensure they are synchronized
+    require('../models/Department.model');
+    require('../models/User.model');
+    require('../models/Vendor.model');
+    require('../models/DeptHead.model');
+    require('../models/AdminProfile.model');
+    require('../models/Tender.model');
+    require('../models/Bid.model');
+    require('../models/Contract.model');
+    require('../models/AuditLog.model');
+    require('../models/AuthCode.model');
+    require('../models/Blacklist.model');
+    require('../models/Notification.model');
+
+    // Sync database tables with defined models
+    await sequelize.sync({ alter: true });
+    logger.info('MySQL database models synced successfully');
   } catch (error) {
-    logger.error(`MongoDB connection failed (attempt ${attempt}/${MAX_RETRIES}): ${error.message}`);
-
-    if (attempt >= MAX_RETRIES) {
-      logger.error('Max MongoDB connection retries reached. Exiting.');
-      throw error;
-    }
-
-    logger.warn(`Retrying MongoDB connection in ${RETRY_DELAY_MS / 1000}s...`);
-    await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY_MS));
-    return connectWithRetry(attempt + 1);
+    logger.error('Unable to connect to MySQL or sync models:', error);
+    process.exit(1);
   }
-}
+};
 
-/**
- * Establishes the Mongoose connection and registers connection event listeners.
- * @returns {Promise<void>}
- */
-async function connectDB() {
-  mongoose.connection.on('disconnected', () => {
-    logger.warn('MongoDB disconnected');
-  });
+module.exports = {
+  sequelize,
+  connectDB,
+};
 
-  mongoose.connection.on('error', (err) => {
-    logger.error(`MongoDB connection error: ${err.message}`);
-  });
-
-  await connectWithRetry();
-}
-
-module.exports = { connectDB };

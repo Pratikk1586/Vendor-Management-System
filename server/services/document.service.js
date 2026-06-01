@@ -19,12 +19,12 @@ function buildDocUrl(filename) {
 /**
  * Saves document metadata after multer upload.
  * @param {Express.Multer.File} file Uploaded file from multer.
- * @param {import('mongoose').Types.ObjectId} userId Owner user ID.
+ * @param {string} userId Owner user ID.
  * @param {string} type Document type label.
  * @returns {Promise<{ type: string, url: string, uploadedAt: Date }>}
  */
 async function saveDocument(file, userId, type) {
-  const vendor = await Vendor.findOne({ userId });
+  const vendor = await Vendor.findOne({ where: { userId } });
   const docEntry = {
     type,
     url: buildDocUrl(file.filename),
@@ -33,7 +33,10 @@ async function saveDocument(file, userId, type) {
   };
 
   if (vendor) {
-    vendor.documents.push(docEntry);
+    const docs = vendor.documents || [];
+    docs.push(docEntry);
+    vendor.documents = docs;
+    vendor.changed('documents', true);
     await vendor.save();
   }
 
@@ -65,27 +68,32 @@ async function deleteDocument(docUrl) {
 /**
  * Returns vendor documents expiring within the given number of days.
  * @param {number} [daysAhead=30] Days ahead to check for expiry.
- * @returns {Promise<Array<{ vendorId: import('mongoose').Types.ObjectId, userId: import('mongoose').Types.ObjectId, companyName: string, document: object }>>}
+ * @returns {Promise<Array<{ vendorId: string, userId: string, companyName: string, document: object }>>}
  */
 async function getExpiringDocuments(daysAhead = 30) {
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() + daysAhead);
+  const now = new Date();
 
-  const vendors = await Vendor.find({
-    'documents.expiryDate': { $lte: cutoff, $gte: new Date() },
-  }).select('userId companyName documents');
+  const vendors = await Vendor.findAll({
+    attributes: ['id', 'userId', 'companyName', 'documents']
+  });
 
   const results = [];
 
   vendors.forEach((vendor) => {
-    vendor.documents.forEach((doc) => {
-      if (doc.expiryDate && doc.expiryDate <= cutoff && doc.expiryDate >= new Date()) {
-        results.push({
-          vendorId: vendor._id,
-          userId: vendor.userId,
-          companyName: vendor.companyName,
-          document: doc,
-        });
+    const docs = vendor.documents || [];
+    docs.forEach((doc) => {
+      if (doc.expiryDate) {
+        const expiry = new Date(doc.expiryDate);
+        if (expiry <= cutoff && expiry >= now) {
+          results.push({
+            vendorId: vendor.id,
+            userId: vendor.userId,
+            companyName: vendor.companyName,
+            document: doc,
+          });
+        }
       }
     });
   });

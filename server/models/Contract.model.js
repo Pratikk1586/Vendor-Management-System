@@ -1,8 +1,9 @@
 /**
- * @fileoverview Mongoose schema for awarded contracts between departments and vendors.
+ * @fileoverview Sequelize model for awarded contracts between departments and vendors.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
 const CONTRACT_STATUSES = [
   'pending_admin',
@@ -11,84 +12,90 @@ const CONTRACT_STATUSES = [
   'terminated',
 ];
 
-const MILESTONE_STATUSES = ['pending', 'in_progress', 'completed', 'overdue'];
-
-const milestoneSchema = new mongoose.Schema(
-  {
-    title: String,
-    dueDate: Date,
-    completedDate: Date,
-    status: {
-      type: String,
-      enum: MILESTONE_STATUSES,
-      default: 'pending',
+const Contract = sequelize.define('Contract', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  contractId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('contractId', val.trim());
+      }
     },
   },
-  { _id: true },
-);
-
-const postContractRatingSchema = new mongoose.Schema(
-  {
-    quality: Number,
-    delivery: Number,
-    overall: Number,
+  tenderId: {
+    type: DataTypes.UUID,
+    allowNull: false,
   },
-  { _id: false },
-);
-
-const contractSchema = new mongoose.Schema(
-  {
-    contractId: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-    },
-    tenderId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Tender',
-      required: true,
-    },
-    vendorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Vendor',
-      required: true,
-    },
-    departmentId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Department',
-      required: true,
-    },
-    contractValue: {
-      type: Number,
-      required: true,
-    },
-    startDate: Date,
-    endDate: Date,
-    status: {
-      type: String,
-      enum: CONTRACT_STATUSES,
-      default: 'pending_admin',
-    },
-    milestones: [milestoneSchema],
-    postContractRating: postContractRatingSchema,
-    awardedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    confirmedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    terminationReason: String,
+  vendorId: {
+    type: DataTypes.UUID,
+    allowNull: false,
   },
-  { timestamps: true },
-);
-
-/**
- * Contract model.
- * @type {mongoose.Model}
- */
-const Contract = mongoose.model('Contract', contractSchema);
+  departmentId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  contractValue: {
+    type: DataTypes.DOUBLE,
+    allowNull: false,
+  },
+  startDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  endDate: {
+    type: DataTypes.DATE,
+    allowNull: true,
+  },
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: 'pending_admin',
+    validate: {
+      isIn: [CONTRACT_STATUSES],
+    },
+  },
+  milestones: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  postContractRating: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  awardedBy: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  confirmedBy: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  terminationReason: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+}, {
+  timestamps: true,
+});
 
 module.exports = Contract;
+
+// Define associations
+process.nextTick(() => {
+  const Tender = require('./Tender.model');
+  const Vendor = require('./Vendor.model');
+  const Department = require('./Department.model');
+  const User = require('./User.model');
+
+  Contract.belongsTo(Tender, { foreignKey: 'tenderId', as: 'tender' });
+  Contract.belongsTo(Vendor, { foreignKey: 'vendorId', as: 'vendor' });
+  Contract.belongsTo(Department, { foreignKey: 'departmentId', as: 'department' });
+  Contract.belongsTo(User, { foreignKey: 'awardedBy', as: 'awarder' });
+  Contract.belongsTo(User, { foreignKey: 'confirmedBy', as: 'confirmer' });
+});

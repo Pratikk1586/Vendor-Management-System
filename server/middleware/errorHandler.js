@@ -2,10 +2,10 @@
  * @fileoverview Global Express error handler with standard response envelope.
  */
 
-const mongoose = require('mongoose');
 const { ZodError } = require('zod');
 const { JsonWebTokenError, TokenExpiredError } = require('jsonwebtoken');
 const multer = require('multer');
+const { ValidationError, UniqueConstraintError, DatabaseError } = require('sequelize');
 const { logger } = require('../config/logger');
 const { error } = require('../utils/responseEnvelope');
 const {
@@ -41,18 +41,21 @@ function errorHandler(err, req, res, next) {
     return error(res, err.message, BAD_REQUEST, { code: err.code });
   }
 
-  if (err.name === 'ValidationError') {
-    const errors = Object.values(err.errors).map((e) => e.message);
+  // Handle Sequelize Validation Errors
+  if (err instanceof ValidationError) {
+    const errors = err.errors.map((e) => e.message);
     return error(res, 'Validation failed', BAD_REQUEST, errors);
   }
 
-  if (err.name === 'CastError') {
-    return error(res, 'Invalid resource identifier', BAD_REQUEST);
+  // Handle Sequelize Unique Constraint Errors
+  if (err instanceof UniqueConstraintError) {
+    const field = err.errors[0]?.path || 'field';
+    return error(res, `${field} already exists`, CONFLICT);
   }
 
-  if (err.code === 11000) {
-    const field = Object.keys(err.keyPattern || {})[0] || 'field';
-    return error(res, `${field} already exists`, CONFLICT);
+  // Handle Sequelize Database Casting or Parsing Errors
+  if (err instanceof DatabaseError && err.message.includes('truncated')) {
+    return error(res, 'Invalid resource identifier or data truncation', BAD_REQUEST);
   }
 
   const statusCode = err.statusCode || SERVER_ERROR;

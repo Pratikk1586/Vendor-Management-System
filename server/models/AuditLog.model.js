@@ -1,38 +1,73 @@
 /**
- * @fileoverview Mongoose schema for immutable audit trail entries.
+ * @fileoverview Sequelize model for immutable audit trail entries.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
-const auditLogSchema = new mongoose.Schema({
+const AuditLog = sequelize.define('AuditLog', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
   action: {
-    type: String,
-    required: true,
-    trim: true,
+    type: DataTypes.STRING,
+    allowNull: false,
+    set(val) {
+      if (val) {
+        this.setDataValue('action', val.trim());
+      }
+    },
   },
   performedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: DataTypes.UUID,
+    allowNull: true,
   },
-  role: String,
-  targetEntity: String,
-  targetId: mongoose.Schema.Types.ObjectId,
-  previousValue: mongoose.Schema.Types.Mixed,
-  newValue: mongoose.Schema.Types.Mixed,
-  ipAddress: String,
+  role: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  targetEntity: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  targetId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  previousValue: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  newValue: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  ipAddress: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   timestamp: {
-    type: Date,
-    default: Date.now,
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
   },
+}, {
+  timestamps: false,
+  indexes: [
+    {
+      fields: ['performedBy'],
+    },
+    {
+      fields: ['timestamp'],
+    },
+  ],
 });
 
-auditLogSchema.index({ performedBy: 1 });
-auditLogSchema.index({ timestamp: -1 });
-
-/**
- * Audit log model.
- * @type {mongoose.Model}
- */
-const AuditLog = mongoose.model('AuditLog', auditLogSchema);
-
 module.exports = AuditLog;
+
+// Define associations
+process.nextTick(() => {
+  const User = require('./User.model');
+  AuditLog.belongsTo(User, { foreignKey: 'performedBy', as: 'performer' });
+});

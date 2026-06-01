@@ -1,44 +1,64 @@
 /**
- * @fileoverview Mongoose schema for organizational departments.
+ * @fileoverview Sequelize model for organizational departments.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
-const departmentSchema = new mongoose.Schema(
-  {
-    code: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true,
-      uppercase: true,
-    },
-    name: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    category: {
-      type: String,
-      trim: true,
-    },
-    description: String,
-    headUserId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    isActive: {
-      type: Boolean,
-      default: true,
+const Department = sequelize.define('Department', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  code: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('code', val.trim().toUpperCase());
+      }
     },
   },
-  { timestamps: true },
-);
-
-/**
- * Department model.
- * @type {mongoose.Model}
- */
-const Department = mongoose.model('Department', departmentSchema);
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    set(val) {
+      if (val) {
+        this.setDataValue('name', val.trim());
+      }
+    },
+  },
+  category: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('category', val.trim());
+      }
+    },
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  headUserId: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+  isActive: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
+  },
+}, {
+  timestamps: true,
+});
 
 module.exports = Department;
+
+// Define relationships
+process.nextTick(() => {
+  const User = require('./User.model');
+  Department.belongsTo(User, { foreignKey: 'headUserId', as: 'headUser' });
+});

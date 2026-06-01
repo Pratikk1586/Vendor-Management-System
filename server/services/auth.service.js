@@ -3,6 +3,7 @@
  */
 
 const crypto = require('crypto');
+const { Op } = require('sequelize');
 const User = require('../models/User.model');
 const Vendor = require('../models/Vendor.model');
 const DeptHead = require('../models/DeptHead.model');
@@ -30,14 +31,14 @@ const { sendVendorRegistrationEmail, sendPasswordResetEmail } = require('./email
  */
 function buildTokens(user) {
   const payload = {
-    id: user._id.toString(),
+    id: user.id,
     role: user.role,
-    departmentId: user.department?.toString(),
+    departmentId: user.departmentId,
   };
 
   return {
     accessToken: signAccessToken(payload),
-    refreshToken: signRefreshToken({ id: user._id.toString() }),
+    refreshToken: signRefreshToken({ id: user.id }),
   };
 }
 
@@ -47,7 +48,7 @@ function buildTokens(user) {
  * @returns {Promise<object>}
  */
 async function registerVendor(data) {
-  const blacklisted = await Blacklist.findOne({ email: data.email.toLowerCase() });
+  const blacklisted = await Blacklist.findOne({ where: { email: data.email.toLowerCase() } });
   if (blacklisted) {
     throw Object.assign(new Error('Email is blacklisted'), { statusCode: 403 });
   }
@@ -68,7 +69,7 @@ async function registerVendor(data) {
   }));
 
   const vendor = await Vendor.create({
-    userId: user._id,
+    userId: user.id,
     companyName: data.companyName,
     gstNumber: data.gstNumber,
     panNumber: data.panNumber,
@@ -89,7 +90,7 @@ async function registerVendor(data) {
     }],
   });
 
-  user.vendorProfile = vendor._id;
+  user.vendorProfileId = vendor.id;
   await user.save();
 
   try {
@@ -114,19 +115,19 @@ async function registerDeptHead(data) {
     email: data.email,
     passwordHash,
     role: DEPT_HEAD,
-    department: data.department,
+    departmentId: data.department,
     status: PENDING,
   });
 
   const deptHead = await DeptHead.create({
-    userId: user._id,
+    userId: user.id,
     employeeId: data.employeeId,
-    department: data.department,
+    departmentId: data.department,
     designation: data.designation,
     yearsAtCompany: data.yearsAtCompany,
   });
 
-  user.deptHeadProfile = deptHead._id;
+  user.deptHeadProfileId = deptHead.id;
   await user.save();
 
   return { user, deptHead };
@@ -154,16 +155,16 @@ async function registerAdmin(data) {
   });
 
   const adminProfile = await AdminProfile.create({
-    userId: user._id,
+    userId: user.id,
     employeeId: data.employeeId,
     designation: data.designation,
     authCodeUsed: data.authCode,
   });
 
-  user.adminProfile = adminProfile._id;
+  user.adminProfileId = adminProfile.id;
   await user.save();
 
-  await revokeCode(data.authCode, user._id);
+  await revokeCode(data.authCode, user.id);
 
   const tokens = buildTokens(user);
   return { user, adminProfile, ...tokens };
@@ -177,7 +178,7 @@ async function registerAdmin(data) {
  * @returns {Promise<object>}
  */
 async function login(email, password, role) {
-  const user = await User.findOne({ email: email.toLowerCase(), role });
+  const user = await User.findOne({ where: { email: email.toLowerCase(), role } });
 
   if (!user) {
     throw Object.assign(new Error('Invalid credentials'), { statusCode: 401 });
@@ -206,7 +207,7 @@ async function login(email, password, role) {
   }
 
   user.loginAttempts = 0;
-  user.lockedUntil = undefined;
+  user.lockedUntil = null;
   user.lastLogin = new Date();
   await user.save();
 
@@ -220,16 +221,16 @@ async function login(email, password, role) {
  */
 async function refreshToken(refreshToken) {
   const decoded = verifyRefreshToken(refreshToken);
-  const user = await User.findById(decoded.id);
+  const user = await User.findByPk(decoded.id);
 
   if (!user || user.status !== ACTIVE) {
     throw Object.assign(new Error('Invalid refresh token'), { statusCode: 401 });
   }
 
   return { accessToken: signAccessToken({
-    id: user._id.toString(),
+    id: user.id,
     role: user.role,
-    departmentId: user.department?.toString(),
+    departmentId: user.departmentId,
   }) };
 }
 
@@ -239,7 +240,7 @@ async function refreshToken(refreshToken) {
  * @returns {Promise<void>}
  */
 async function forgotPassword(email) {
-  const user = await User.findOne({ email: email.toLowerCase() });
+  const user = await User.findOne({ where: { email: email.toLowerCase() } });
   if (!user) {
     return;
   }
@@ -261,8 +262,10 @@ async function forgotPassword(email) {
  */
 async function resetPassword(token, password) {
   const user = await User.findOne({
-    passwordResetToken: token,
-    passwordResetExpiry: { $gt: new Date() },
+    where: {
+      passwordResetToken: token,
+      passwordResetExpiry: { [Op.gt]: new Date() },
+    }
   });
 
   if (!user) {
@@ -270,8 +273,8 @@ async function resetPassword(token, password) {
   }
 
   user.passwordHash = await hashPassword(password);
-  user.passwordResetToken = undefined;
-  user.passwordResetExpiry = undefined;
+  user.passwordResetToken = null;
+  user.passwordResetExpiry = null;
   await user.save();
 }
 

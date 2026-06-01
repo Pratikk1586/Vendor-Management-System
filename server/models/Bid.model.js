@@ -1,8 +1,9 @@
 /**
- * @fileoverview Mongoose schema for vendor bids submitted against tenders.
+ * @fileoverview Sequelize model for vendor bids submitted against tenders.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 const {
   SUBMITTED,
   UNDER_EVALUATION,
@@ -21,82 +22,116 @@ const BID_STATUSES = [
   REJECTED,
 ];
 
-const technicalScoreSchema = new mongoose.Schema(
-  {
-    criteriaName: String,
-    score: Number,
-    maxScore: Number,
-    scoredBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+const Bid = sequelize.define('Bid', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  bidId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('bidId', val.trim());
+      }
     },
   },
-  { _id: true },
-);
-
-const bidSchema = new mongoose.Schema(
-  {
-    bidId: {
-      type: String,
-      required: true,
+  tenderId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  vendorId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  quotedAmount: {
+    type: DataTypes.DOUBLE,
+    allowNull: false,
+  },
+  deliveryDays: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  bidValidityDays: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  technicalProposalUrl: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  commercialProposalUrl: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  supportingDocs: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  submittedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
+  status: {
+    type: DataTypes.STRING,
+    defaultValue: SUBMITTED,
+    validate: {
+      isIn: [BID_STATUSES],
+    },
+  },
+  technicalScores: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  totalTechnicalScore: {
+    type: DataTypes.DOUBLE,
+    allowNull: true,
+  },
+  commercialScore: {
+    type: DataTypes.DOUBLE,
+    allowNull: true,
+  },
+  weightedTotalScore: {
+    type: DataTypes.DOUBLE,
+    allowNull: true,
+  },
+  rank: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  evaluatorComments: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  isFlagged: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  flagReason: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+}, {
+  timestamps: true,
+  indexes: [
+    {
       unique: true,
-      trim: true,
+      fields: ['tenderId', 'vendorId'],
     },
-    tenderId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Tender',
-      required: true,
-    },
-    vendorId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Vendor',
-      required: true,
-    },
-    quotedAmount: {
-      type: Number,
-      required: true,
-    },
-    deliveryDays: {
-      type: Number,
-      required: true,
-    },
-    bidValidityDays: {
-      type: Number,
-      required: true,
-    },
-    technicalProposalUrl: String,
-    commercialProposalUrl: String,
-    supportingDocs: [String],
-    submittedAt: {
-      type: Date,
-      default: Date.now,
-    },
-    status: {
-      type: String,
-      enum: BID_STATUSES,
-      default: SUBMITTED,
-    },
-    technicalScores: [technicalScoreSchema],
-    totalTechnicalScore: Number,
-    commercialScore: Number,
-    weightedTotalScore: Number,
-    rank: Number,
-    evaluatorComments: String,
-    isFlagged: {
-      type: Boolean,
-      default: false,
-    },
-    flagReason: String,
-  },
-  { timestamps: true },
-);
-
-bidSchema.index({ tenderId: 1, vendorId: 1 }, { unique: true });
-
-/**
- * Bid model.
- * @type {mongoose.Model}
- */
-const Bid = mongoose.model('Bid', bidSchema);
+  ],
+});
 
 module.exports = Bid;
+
+// Define associations
+process.nextTick(() => {
+  const Tender = require('./Tender.model');
+  const Vendor = require('./Vendor.model');
+
+  Bid.belongsTo(Tender, { foreignKey: 'tenderId', as: 'tender' });
+  Bid.belongsTo(Vendor, { foreignKey: 'vendorId', as: 'vendor' });
+});

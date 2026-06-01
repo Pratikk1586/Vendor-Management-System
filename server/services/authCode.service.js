@@ -3,6 +3,7 @@
  */
 
 const crypto = require('crypto');
+const { Op } = require('sequelize');
 const AuthCode = require('../models/AuthCode.model');
 const { hashPassword, comparePassword } = require('../utils/hashPassword');
 
@@ -19,7 +20,7 @@ function generatePlainCode() {
 
 /**
  * Creates a new admin auth code and returns the plain code once.
- * @param {import('mongoose').Types.ObjectId} createdBy User ID of the creating admin.
+ * @param {string} createdBy User ID of the creating admin.
  * @returns {Promise<{ code: string, expiresAt: Date }>}
  */
 async function generateCode(createdBy) {
@@ -41,12 +42,14 @@ async function generateCode(createdBy) {
 /**
  * Validates a plain auth code against stored hashes.
  * @param {string} plainCode Code entered by the user.
- * @returns {Promise<import('mongoose').Document|null>}
+ * @returns {Promise<object|null>}
  */
 async function validateCode(plainCode) {
-  const candidates = await AuthCode.find({
-    isUsed: false,
-    expiresAt: { $gt: new Date() },
+  const candidates = await AuthCode.findAll({
+    where: {
+      isUsed: false,
+      expiresAt: { [Op.gt]: new Date() },
+    }
   });
 
   for (const record of candidates) {
@@ -62,12 +65,14 @@ async function validateCode(plainCode) {
 /**
  * Revokes an auth code by marking it used or deleting it.
  * @param {string} code Plain or stored code identifier.
- * @param {import('mongoose').Types.ObjectId} [usedBy] User who consumed the code.
+ * @param {string} [usedBy] User who consumed the code.
  * @returns {Promise<boolean>}
  */
 async function revokeCode(code, usedBy) {
   const record = await AuthCode.findOne({
-    $or: [{ code }, { hashedCode: code }],
+    where: {
+      [Op.or]: [{ code }, { hashedCode: code }],
+    }
   });
 
   if (!record) {

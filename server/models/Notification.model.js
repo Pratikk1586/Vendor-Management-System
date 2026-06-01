@@ -1,37 +1,58 @@
 /**
- * @fileoverview Mongoose schema for in-app user notifications.
+ * @fileoverview Sequelize model for in-app user notifications.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
-const notificationSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-    },
-    title: {
-      type: String,
-      trim: true,
-    },
-    message: String,
-    type: String,
-    isRead: {
-      type: Boolean,
-      default: false,
-    },
-    link: String,
+const Notification = sequelize.define('Notification', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
   },
-  { timestamps: true },
-);
-
-notificationSchema.index({ userId: 1, isRead: 1, createdAt: -1 });
-
-/**
- * Notification model.
- * @type {mongoose.Model}
- */
-const Notification = mongoose.model('Notification', notificationSchema);
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('title', val.trim());
+      }
+    },
+  },
+  message: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  type: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  isRead: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  link: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+}, {
+  timestamps: true,
+  indexes: [
+    {
+      fields: ['userId', 'isRead', 'createdAt'],
+    },
+  ],
+});
 
 module.exports = Notification;
+
+// Define associations
+process.nextTick(() => {
+  const User = require('./User.model');
+  Notification.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+});

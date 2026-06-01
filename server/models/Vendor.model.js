@@ -1,14 +1,9 @@
 /**
- * @fileoverview Mongoose schema for vendor company profiles and performance data.
+ * @fileoverview Sequelize model for vendor company profiles and performance data.
  */
 
-const mongoose = require('mongoose');
-const {
-  PENDING,
-  ACTIVE,
-  SUSPENDED,
-  BLACKLISTED,
-} = require('../constants/statusTypes');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
 const COMPANY_TYPES = [
   'proprietorship',
@@ -21,135 +16,126 @@ const COMPANY_TYPES = [
 
 const VENDOR_TIERS = ['silver', 'gold', 'platinum'];
 
-const vendorDepartmentSchema = new mongoose.Schema(
-  {
-    deptId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Department',
-      required: true,
-    },
-    status: {
-      type: String,
-      enum: [PENDING, ACTIVE, SUSPENDED, BLACKLISTED],
-      default: PENDING,
-    },
-    approvedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    approvedAt: Date,
-    rejectionReason: String,
+const Vendor = sequelize.define('Vendor', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
   },
-  { _id: true },
-);
-
-const performanceScoreSchema = new mongoose.Schema(
-  {
-    quality: { type: Number, default: 0 },
-    delivery: { type: Number, default: 0 },
-    price: { type: Number, default: 0 },
-    compliance: { type: Number, default: 0 },
-    overall: { type: Number, default: 0 },
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    unique: true,
   },
-  { _id: false },
-);
-
-const addressSchema = new mongoose.Schema(
-  {
-    street: String,
-    city: String,
-    state: String,
-    pin: String,
-  },
-  { _id: false },
-);
-
-const contactSchema = new mongoose.Schema(
-  {
-    name: String,
-    designation: String,
-    email: String,
-    mobile: String,
-    isPrimary: { type: Boolean, default: false },
-  },
-  { _id: true },
-);
-
-const documentSchema = new mongoose.Schema(
-  {
-    type: String,
-    url: String,
-    uploadedAt: Date,
-    expiryDate: Date,
-    verifiedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-    },
-    isVerified: { type: Boolean, default: false },
-  },
-  { _id: true },
-);
-
-const vendorSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-      unique: true,
-    },
-    companyName: {
-      type: String,
-      trim: true,
-    },
-    gstNumber: {
-      type: String,
-      unique: true,
-      sparse: true,
-      trim: true,
-    },
-    panNumber: {
-      type: String,
-      trim: true,
-    },
-    yearEstablished: Number,
-    companyType: {
-      type: String,
-      enum: COMPANY_TYPES,
-    },
-    industryType: String,
-    website: String,
-    departments: [vendorDepartmentSchema],
-    tier: {
-      type: String,
-      enum: VENDOR_TIERS,
-      default: 'silver',
-    },
-    performanceScore: {
-      type: performanceScoreSchema,
-      default: () => ({}),
-    },
-    address: addressSchema,
-    contacts: [contactSchema],
-    documents: [documentSchema],
-    annualTurnover: String,
-    operationalLocations: [String],
-    isPreferred: {
-      type: Boolean,
-      default: false,
-    },
-    isStrategicPartner: {
-      type: Boolean,
-      default: false,
+  companyName: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('companyName', val.trim());
+      }
     },
   },
-  { timestamps: true },
-);
-
-/**
- * Vendor profile model.
- * @type {mongoose.Model}
- */
-const Vendor = mongoose.model('Vendor', vendorSchema);
+  gstNumber: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('gstNumber', val.trim());
+      }
+    },
+  },
+  panNumber: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('panNumber', val.trim());
+      }
+    },
+  },
+  yearEstablished: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  companyType: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    validate: {
+      isIn: [COMPANY_TYPES],
+    },
+  },
+  industryType: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  website: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  departments: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  tier: {
+    type: DataTypes.STRING,
+    defaultValue: 'silver',
+    validate: {
+      isIn: [VENDOR_TIERS],
+    },
+  },
+  performanceScore: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: {
+      quality: 0,
+      delivery: 0,
+      price: 0,
+      compliance: 0,
+      overall: 0,
+    },
+  },
+  address: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  contacts: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  documents: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  annualTurnover: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  operationalLocations: {
+    type: DataTypes.JSON,
+    allowNull: true,
+    defaultValue: [],
+  },
+  isPreferred: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+  isStrategicPartner: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+}, {
+  timestamps: true,
+});
 
 module.exports = Vendor;
+
+// Define associations
+process.nextTick(() => {
+  const User = require('./User.model');
+  Vendor.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+});

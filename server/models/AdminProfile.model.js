@@ -1,36 +1,50 @@
 /**
- * @fileoverview Mongoose schema for HR admin employee profiles.
+ * @fileoverview Sequelize model for HR admin employee profiles.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
-const adminProfileSchema = new mongoose.Schema(
-  {
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
-      required: true,
-      unique: true,
-    },
-    employeeId: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    designation: String,
-    authCodeUsed: String,
-    isSuperAdmin: {
-      type: Boolean,
-      default: false,
+const AdminProfile = sequelize.define('AdminProfile', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  userId: {
+    type: DataTypes.UUID,
+    allowNull: false,
+    unique: true,
+  },
+  employeeId: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    set(val) {
+      if (val) {
+        this.setDataValue('employeeId', val.trim());
+      }
     },
   },
-  { timestamps: true },
-);
-
-/**
- * Admin profile model.
- * @type {mongoose.Model}
- */
-const AdminProfile = mongoose.model('AdminProfile', adminProfileSchema);
+  designation: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  authCodeUsed: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  isSuperAdmin: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false,
+  },
+}, {
+  timestamps: true,
+});
 
 module.exports = AdminProfile;
+
+// Define associations
+process.nextTick(() => {
+  const User = require('./User.model');
+  AdminProfile.belongsTo(User, { foreignKey: 'userId', as: 'user' });
+});

@@ -1,31 +1,42 @@
 /**
- * @fileoverview Mongoose schema for globally blacklisted email addresses.
+ * @fileoverview Sequelize model for globally blacklisted email addresses.
  */
 
-const mongoose = require('mongoose');
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('../config/db');
 
-const blacklistSchema = new mongoose.Schema(
-  {
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-      trim: true,
-    },
-    reason: String,
-    blacklistedBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'User',
+const Blacklist = sequelize.define('Blacklist', {
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true,
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
+    set(val) {
+      if (val) {
+        this.setDataValue('email', val.trim().toLowerCase());
+      }
     },
   },
-  { timestamps: true },
-);
-
-/**
- * Blacklist model.
- * @type {mongoose.Model}
- */
-const Blacklist = mongoose.model('Blacklist', blacklistSchema);
+  reason: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  blacklistedBy: {
+    type: DataTypes.UUID,
+    allowNull: true,
+  },
+}, {
+  timestamps: true,
+});
 
 module.exports = Blacklist;
+
+// Define associations
+process.nextTick(() => {
+  const User = require('./User.model');
+  Blacklist.belongsTo(User, { foreignKey: 'blacklistedBy', as: 'blacklister' });
+});

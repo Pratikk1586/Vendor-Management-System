@@ -1,12 +1,15 @@
 /**
- * @fileoverview Analytics and reporting via MongoDB aggregation pipelines.
+ * @fileoverview Analytics and reporting via Sequelize aggregation.
  */
 
+const { Op } = require('sequelize');
+const { sequelize } = require('../config/db');
 const Vendor = require('../models/Vendor.model');
 const Tender = require('../models/Tender.model');
 const Bid = require('../models/Bid.model');
 const Contract = require('../models/Contract.model');
 const User = require('../models/User.model');
+const Department = require('../models/Department.model');
 const { VENDOR, DEPT_HEAD, HR_ADMIN } = require('../constants/roles');
 
 /**
@@ -15,11 +18,13 @@ const { VENDOR, DEPT_HEAD, HR_ADMIN } = require('../constants/roles');
  */
 async function getVendorStats() {
   const [byTier, total, preferred] = await Promise.all([
-    Vendor.aggregate([
-      { $group: { _id: '$tier', count: { $sum: 1 } } },
-    ]),
-    Vendor.countDocuments(),
-    Vendor.countDocuments({ isPreferred: true }),
+    Vendor.findAll({
+      attributes: [['tier', '_id'], [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['tier'],
+      raw: true
+    }),
+    Vendor.count(),
+    Vendor.count({ where: { isPreferred: true } }),
   ]);
 
   return { total, preferred, byTier };
@@ -31,18 +36,18 @@ async function getVendorStats() {
  */
 async function getTenderStats() {
   const [byStatus, total, totalBudget] = await Promise.all([
-    Tender.aggregate([
-      { $group: { _id: '$status', count: { $sum: 1 } } },
-    ]),
-    Tender.countDocuments(),
-    Tender.aggregate([
-      { $group: { _id: null, total: { $sum: '$estimatedBudget' } } },
-    ]),
+    Tender.findAll({
+      attributes: [['status', '_id'], [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['status'],
+      raw: true
+    }),
+    Tender.count(),
+    Tender.sum('estimatedBudget'),
   ]);
 
   return {
     total,
-    totalBudget: totalBudget[0]?.total || 0,
+    totalBudget: totalBudget || 0,
     byStatus,
   };
 }
@@ -53,13 +58,16 @@ async function getTenderStats() {
  */
 async function getBidStats() {
   const [byStatus, total, avgAmount] = await Promise.all([
-    Bid.aggregate([
-      { $group: { _id: '$status', count: { $sum: 1 } } },
-    ]),
-    Bid.countDocuments(),
-    Bid.aggregate([
-      { $group: { _id: null, avg: { $avg: '$quotedAmount' } } },
-    ]),
+    Bid.findAll({
+      attributes: [['status', '_id'], [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['status'],
+      raw: true
+    }),
+    Bid.count(),
+    Bid.findAll({
+      attributes: [[sequelize.fn('AVG', sequelize.col('quotedAmount')), 'avg']],
+      raw: true
+    }),
   ]);
 
   return {
@@ -75,18 +83,18 @@ async function getBidStats() {
  */
 async function getContractStats() {
   const [byStatus, total, totalValue] = await Promise.all([
-    Contract.aggregate([
-      { $group: { _id: '$status', count: { $sum: 1 } } },
-    ]),
-    Contract.countDocuments(),
-    Contract.aggregate([
-      { $group: { _id: null, total: { $sum: '$contractValue' } } },
-    ]),
+    Contract.findAll({
+      attributes: [['status', '_id'], [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['status'],
+      raw: true
+    }),
+    Contract.count(),
+    Contract.sum('contractValue'),
   ]);
 
   return {
     total,
-    totalValue: totalValue[0]?.total || 0,
+    totalValue: totalValue || 0,
     byStatus,
   };
 }
@@ -97,13 +105,17 @@ async function getContractStats() {
  */
 async function getMemberStats() {
   const [byRole, byStatus, total] = await Promise.all([
-    User.aggregate([
-      { $group: { _id: '$role', count: { $sum: 1 } } },
-    ]),
-    User.aggregate([
-      { $group: { _id: '$status', count: { $sum: 1 } } },
-    ]),
-    User.countDocuments(),
+    User.findAll({
+      attributes: [['role', '_id'], [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['role'],
+      raw: true
+    }),
+    User.findAll({
+      attributes: [['status', '_id'], [sequelize.fn('COUNT', sequelize.col('id')), 'count']],
+      group: ['status'],
+      raw: true
+    }),
+    User.count(),
   ]);
 
   return {
@@ -121,34 +133,30 @@ async function getMemberStats() {
  * @returns {Promise<Array<object>>}
  */
 async function getSpendByDepartment() {
-  return Contract.aggregate([
-    {
-      $group: {
-        _id: '$departmentId',
-        totalSpend: { $sum: '$contractValue' },
-        contractCount: { $sum: 1 },
-      },
-    },
-    {
-      $lookup: {
-        from: 'departments',
-        localField: '_id',
-        foreignField: '_id',
-        as: 'department',
-      },
-    },
-    { $unwind: { path: '$department', preserveNullAndEmptyArrays: true } },
-    {
-      $project: {
-        departmentId: '$_id',
-        departmentName: '$department.name',
-        departmentCode: '$department.code',
-        totalSpend: 1,
-        contractCount: 1,
-      },
-    },
-    { $sort: { totalSpend: -1 } },
-  ]);
+  const results = await Contract.findAll({
+    attributes: [
+      ['departmentId', 'departmentId'],
+      [sequelize.fn('SUM', sequelize.col('contractValue')), 'totalSpend'],
+      [sequelize.fn('COUNT', sequelize.col('Contract.id')), 'contractCount']
+    ],
+    include: [{
+      model: Department,
+      as: 'department',
+      attributes: ['name', 'code']
+    }],
+    group: ['departmentId', 'department.id'],
+    order: [[sequelize.fn('SUM', sequelize.col('contractValue')), 'DESC']],
+    raw: true,
+    nest: true
+  });
+
+  return results.map(r => ({
+    departmentId: r.departmentId,
+    departmentName: r.department?.name,
+    departmentCode: r.department?.code,
+    totalSpend: Number(r.totalSpend || 0),
+    contractCount: Number(r.contractCount || 0)
+  }));
 }
 
 /**
@@ -159,35 +167,46 @@ async function getMonthlyTrend() {
   const twelveMonthsAgo = new Date();
   twelveMonthsAgo.setMonth(twelveMonthsAgo.getMonth() - 12);
 
-  const [tenders, contracts] = await Promise.all([
-    Tender.aggregate([
-      { $match: { createdAt: { $gte: twelveMonthsAgo } } },
-      {
-        $group: {
-          _id: {
-            year: { $year: '$createdAt' },
-            month: { $month: '$createdAt' },
-          },
-          count: { $sum: 1 },
-        },
-      },
-      { $sort: { '_id.year': 1, '_id.month': 1 } },
-    ]),
-    Contract.aggregate([
-      { $match: { createdAt: { $gte: twelveMonthsAgo } } },
-      {
-        $group: {
-          _id: {
-            year: { $year: '$createdAt' },
-            month: { $month: '$createdAt' },
-          },
-          count: { $sum: 1 },
-          value: { $sum: '$contractValue' },
-        },
-      },
-      { $sort: { '_id.year': 1, '_id.month': 1 } },
-    ]),
+  const [tendersList, contractsList] = await Promise.all([
+    Tender.findAll({
+      where: { createdAt: { [Op.gte]: twelveMonthsAgo } },
+      attributes: ['createdAt'],
+      raw: true
+    }),
+    Contract.findAll({
+      where: { createdAt: { [Op.gte]: twelveMonthsAgo } },
+      attributes: ['createdAt', 'contractValue'],
+      raw: true
+    }),
   ]);
+
+  const tendersGroup = {};
+  tendersList.forEach(t => {
+    const date = new Date(t.createdAt);
+    const key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+    tendersGroup[key] = (tendersGroup[key] || 0) + 1;
+  });
+
+  const contractsGroup = {};
+  contractsList.forEach(c => {
+    const date = new Date(c.createdAt);
+    const key = `${date.getFullYear()}-${date.getMonth() + 1}`;
+    if (!contractsGroup[key]) {
+      contractsGroup[key] = { count: 0, value: 0 };
+    }
+    contractsGroup[key].count += 1;
+    contractsGroup[key].value += c.contractValue || 0;
+  });
+
+  const tenders = Object.keys(tendersGroup).map(key => {
+    const [year, month] = key.split('-').map(Number);
+    return { _id: { year, month }, count: tendersGroup[key] };
+  }).sort((a, b) => a._id.year - b._id.year || a._id.month - b._id.month);
+
+  const contracts = Object.keys(contractsGroup).map(key => {
+    const [year, month] = key.split('-').map(Number);
+    return { _id: { year, month }, count: contractsGroup[key].count, value: contractsGroup[key].value };
+  }).sort((a, b) => a._id.year - b._id.year || a._id.month - b._id.month);
 
   return { tenders, contracts };
 }

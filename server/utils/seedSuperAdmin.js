@@ -18,16 +18,12 @@ const { logger } = require('../config/logger');
  */
 async function seedDepartments() {
   for (const dept of DEPARTMENTS) {
-    await Department.findOneAndUpdate(
-      { code: dept.code },
-      {
-        code: dept.code,
-        name: dept.name,
-        category: dept.category,
-        isActive: true,
-      },
-      { upsert: true, new: true },
-    );
+    await Department.upsert({
+      code: dept.code,
+      name: dept.name,
+      category: dept.category,
+      isActive: true,
+    });
   }
   logger.info(`Seeded ${DEPARTMENTS.length} departments`);
 }
@@ -37,7 +33,7 @@ async function seedDepartments() {
  * @returns {Promise<void>}
  */
 async function seedSuperAdmin() {
-  const existingAdmin = await User.findOne({ role: HR_ADMIN });
+  const existingAdmin = await User.findOne({ where: { role: HR_ADMIN } });
 
   if (existingAdmin) {
     logger.info('Super admin already exists — skipping seed');
@@ -67,16 +63,16 @@ async function seedSuperAdmin() {
   });
 
   const adminProfile = await AdminProfile.create({
-    userId: user._id,
+    userId: user.id,
     employeeId: 'TSC-ADMIN-001',
     designation: 'System Administrator',
     isSuperAdmin: true,
   });
 
-  user.adminProfile = adminProfile._id;
+  user.adminProfileId = adminProfile.id;
   await user.save();
 
-  const { code } = await generateCode(user._id);
+  const { code } = await generateCode(user.id);
 
   console.log('========================================');
   console.log('  SUPER ADMIN SEEDED SUCCESSFULLY');

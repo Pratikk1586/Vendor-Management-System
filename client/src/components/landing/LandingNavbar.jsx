@@ -118,7 +118,7 @@ export default function LandingNavbar() {
                   to="/register"
                   className="inline-flex items-center px-4 py-2 rounded-lg text-xs font-semibold bg-tata-blue text-white hover:bg-tata-light shadow-md shadow-tata-blue/15 hover:scale-105 transition-all duration-200"
                 >
-                  Register as Vendor
+                  Register
                 </Link>
               </>
             )}

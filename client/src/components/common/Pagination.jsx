@@ -48,12 +48,12 @@ export default function Pagination({
           type="button"
           disabled={page <= 1}
           onClick={() => onPageChange(page - 1)}
-          className="rounded-lg border border-steel-600 p-2 text-gray-300 hover:bg-steel-700 disabled:opacity-40"
+          className="rounded-lg border border-steel-600 p-2 text-gray-300  hover:bg-steel-700 disabled:opacity-40"
           aria-label="Previous page"
         >
           <ChevronLeft size={18} />
         </button>
-        <span className="text-sm text-gray-300">
+        <span className="text-sm text-gray-600">
           Page {page} of {totalPages || 1}
         </span>
         <button

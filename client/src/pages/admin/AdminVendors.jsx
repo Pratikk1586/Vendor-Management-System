@@ -34,7 +34,7 @@ export default function AdminVendors() {
     let nextTier = 'Silver';
     if (currentTier === 'Silver') nextTier = 'Gold';
     else if (currentTier === 'Gold') nextTier = 'Platinum';
-    
+
     setVendors(prev => prev.map(v => v.id === id ? { ...v, tier: nextTier } : v));
     triggerToast(`Override Tier: Upgraded ${id} to ${nextTier}`);
   };
@@ -45,7 +45,7 @@ export default function AdminVendors() {
   };
 
   const getStatusBadge = (status) => {
-    return status === 'Active' 
+    return status === 'Active'
       ? <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Active</span>
       : <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-red-500/10 text-red-300 border border-red-500/20">Suspended</span>;
   };
@@ -67,7 +67,7 @@ export default function AdminVendors() {
       label: 'Supplier Details',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-slate-900">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">ID: {row.id} | {row.sector}</span>
         </div>
       ),
@@ -96,7 +96,7 @@ export default function AdminVendors() {
             {row.status === 'Active' ? <ToggleRight className="w-4 h-4 text-emerald-400" /> : <ToggleLeft className="w-4 h-4 text-slate-400" />}
             <span>Override Lock</span>
           </button>
-          
+
           <button
             onClick={() => handleUpgradeTier(row.id, row.tier)}
             type="button"
@@ -112,11 +112,11 @@ export default function AdminVendors() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN METRICS</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Vendor Partner Oversight
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -137,7 +137,7 @@ export default function AdminVendors() {
 
       <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl">
         {activeTab === 'list' ? (
-          
+
           /* Master Table */
           <DataTable
             columns={columns}
@@ -145,10 +145,10 @@ export default function AdminVendors() {
             emptyMessage="No vendors found."
           />
         ) : (
-          
+
           /* Document Expiry Tracker */
           <div className="space-y-4">
-            <div className="p-4 bg-steel-900/40 border border-steel-700/60 rounded-xl flex items-center space-x-3 text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+            <div className="p-4 bg-gray-600/40 border border-steel-700/60 rounded-xl flex items-center space-x-3 text-xs sm:text-sm text-black leading-relaxed font-normal">
               <ShieldAlert className="w-5 h-5 text-tata-gold flex-shrink-0" />
               <p>
                 The document audit ledger lists document compliance parameters expiring within the next 30 days. Action overrides allow locking non-compliant profiles statefully.
@@ -160,11 +160,11 @@ export default function AdminVendors() {
                 const date = new Date(v.gstExpiry);
                 const expired = date < new Date();
                 const days = Math.round((date - new Date()) / (1000 * 60 * 60 * 24));
-                
+
                 return (
                   <div key={v.id} className="p-4 bg-steel-900/20 border border-steel-700/50 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div className="space-y-1">
-                      <h4 className="text-sm font-semibold text-white">{v.name}</h4>
+                      <h4 className="text-sm font-semibold text-black">{v.name}</h4>
                       <div className="flex items-center text-[10px] text-slate-500 font-mono space-x-3">
                         <span className="flex items-center"><Building2 className="w-3.5 h-3.5 mr-1" />ID: {v.id}</span>
                         <span className="flex items-center"><Calendar className="w-3.5 h-3.5 mr-1" />Expires: {v.gstExpiry}</span>

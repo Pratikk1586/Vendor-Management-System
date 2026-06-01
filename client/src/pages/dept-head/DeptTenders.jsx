@@ -33,12 +33,12 @@ export default function DeptTenders() {
     {
       key: 'id',
       label: 'Tender Ref',
-      render: (val) => <span className="font-mono font-bold text-white">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-slate-700">{val}</span>,
     },
     {
       key: 'title',
       label: 'Procurement Title',
-      render: (val) => <span className="font-semibold text-slate-200">{val}</span>,
+      render: (val) => <span className="font-semibold text-slate-400">{val}</span>,
     },
     {
       key: 'budget',
@@ -77,12 +77,12 @@ export default function DeptTenders() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header with quick creation button */}
       <div className="border-b border-steel-700/60 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">DIVISION SCHEDULING</span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
             Tender Management
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 font-normal">

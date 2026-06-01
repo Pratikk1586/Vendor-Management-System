@@ -26,11 +26,11 @@ export default function DeptDashboard() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header Banner */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">DIVISION MANAGER WORKSPACE</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           {mockDeptInfo.name}
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -75,10 +75,10 @@ export default function DeptDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Side: Department Info & Activities */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* Department Metadata Details */}
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl">
             <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold border-b border-steel-700 pb-3 mb-4">
@@ -86,17 +86,17 @@ export default function DeptDashboard() {
             </h3>
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs sm:text-sm">
-              <div className="p-3 bg-steel-900 border border-steel-700/60 rounded-xl">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
                 <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Division Code</span>
-                <span className="font-semibold text-white block mt-2 font-mono">{mockDeptInfo.code}</span>
+                <span className="font-semibold text-slate-800 block mt-2 font-mono">{mockDeptInfo.code}</span>
               </div>
-              <div className="p-3 bg-steel-900 border border-steel-700/60 rounded-xl">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl">
                 <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Divisional Head</span>
-                <span className="font-semibold text-white block mt-2">{mockDeptInfo.manager}</span>
+                <span className="font-semibold text-slate-800 block mt-2">{mockDeptInfo.manager}</span>
               </div>
-              <div className="p-3 bg-steel-900 border border-steel-700/60 rounded-xl sm:col-span-2">
+              <div className="p-3 bg-slate-50 border border-slate-200 rounded-xl sm:col-span-2">
                 <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Office headquarters</span>
-                <span className="font-semibold text-slate-300 block mt-2">{mockDeptInfo.location}</span>
+                <span className="font-semibold text-slate-700 block mt-2">{mockDeptInfo.location}</span>
               </div>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function DeptDashboard() {
                     <ArrowUpRight className="w-4.5 h-4.5" />
                   </div>
                   <div>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-normal font-normal">{act.text}</p>
+                    <p className="text-xs sm:text-sm text-slate-700 leading-normal font-normal">{act.text}</p>
                     <span className="text-[10px] text-slate-500 block mt-1 font-mono">{act.time}</span>
                   </div>
                 </div>
@@ -126,7 +126,7 @@ export default function DeptDashboard() {
 
         {/* Right Side: Alerts */}
         <div className="space-y-6">
-          
+
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl flex flex-col h-full">
             <div className="flex items-center space-x-2 border-b border-steel-700 pb-3 mb-4">
               <Calendar className="w-4.5 h-4.5 text-tata-gold" />
@@ -137,16 +137,15 @@ export default function DeptDashboard() {
               {mockAlerts.map((alert) => (
                 <div
                   key={alert.id}
-                  className={`p-3.5 rounded-xl border flex items-start space-x-3 ${
-                    alert.type === 'warning'
-                      ? 'bg-red-950/20 border-red-500/25 text-red-300'
-                      : 'bg-tata-blue/5 border-tata-blue/15 text-slate-300'
-                  }`}
+                  className={`p-3.5 rounded-xl border flex items-start space-x-3 ${alert.type === 'warning'
+                    ? 'bg-red-50 border-red-100 text-red-700'
+                    : 'bg-tata-blue/5 border-tata-blue/15 text-slate-600'
+                    }`}
                 >
-                  <AlertCircle className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${alert.type === 'warning' ? 'text-red-400' : 'text-tata-light'}`} />
+                  <AlertCircle className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${alert.type === 'warning' ? 'text-red-500' : 'text-tata-light'}`} />
                   <div className="space-y-1">
-                    <h4 className="text-xs font-bold text-white leading-none">{alert.title}</h4>
-                    <p className="text-[11px] leading-relaxed font-normal text-slate-400">{alert.desc}</p>
+                    <h4 className="text-xs font-bold text-slate-800 leading-none">{alert.title}</h4>
+                    <p className="text-[11px] leading-relaxed font-normal text-slate-500">{alert.desc}</p>
                   </div>
                 </div>
               ))}

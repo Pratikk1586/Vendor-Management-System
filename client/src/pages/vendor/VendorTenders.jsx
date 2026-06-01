@@ -68,15 +68,15 @@ export default function VendorTenders() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Tenders Header */}
       <div className="border-b border-steel-700/60 pb-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">ACTIVE SOURCING OPPORTUNITIES</span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-700 mt-1">
             Browse Procurement Tenders
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 font-normal">
+          <p className="text-xs sm:text-sm text-gray-500 font-normal">
             Submit bids and view technical compliance requirements for live sourcing schedules.
           </p>
         </div>
@@ -84,10 +84,10 @@ export default function VendorTenders() {
 
       {/* Sourcing Search and Filter Controls */}
       <div className="p-4 rounded-2xl bg-steel-800 border border-steel-700/60 space-y-4">
-        <div className="max-w-md">
+        <div className="max-w-md text-black">
           <SearchInput onSearch={setSearchTerm} placeholder="Search by tender ID or title..." />
         </div>
-        <div className="border-t border-steel-700/60 pt-3">
+        <div className="border-t border-slate-200/60 pt-3">
           <FilterBar
             filters={filterConfig}
             values={filters}
@@ -106,32 +106,32 @@ export default function VendorTenders() {
               className="bg-steel-800 border border-steel-700 hover:border-tata-blue/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between group transition-colors duration-150"
             >
               <div className="space-y-3">
-                
+
                 {/* Reference ID & Location */}
                 <div className="flex items-center justify-between">
                   <span className="px-2 py-0.5 rounded bg-steel-900 border border-steel-700 font-mono font-bold text-[10px] text-tata-gold leading-none">
                     {tender.id}
                   </span>
-                  <div className="flex items-center text-[10px] text-slate-400 space-x-1">
-                    <MapPin className="w-3.5 h-3.5 text-slate-500" />
+                  <div className="flex items-center text-[10px] text-slate-600 space-x-1">
+                    <MapPin className="w-3.5 h-3.5 text-slate-600" />
                     <span>{tender.location}</span>
                   </div>
                 </div>
 
                 {/* Tender Title */}
-                <h3 className="text-base font-bold text-white leading-snug group-hover:text-tata-light transition-colors">
+                <h3 className="text-base font-bold text-black leading-snug group-hover:text-tata-light transition-colors">
                   {tender.title}
                 </h3>
 
                 {/* Sourcing Details */}
                 <div className="grid grid-cols-2 gap-3 p-3 bg-steel-900/35 border border-steel-700/50 rounded-xl">
                   <div>
-                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Department</span>
-                    <span className="text-xs font-semibold text-white block mt-1.5">{tender.dept}</span>
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-stone-700 block leading-none">Department</span>
+                    <span className="text-xs font-semibold text-black block mt-1.5">{tender.dept}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Estimated Budget</span>
-                    <span className="text-xs font-semibold text-tata-gold block mt-1.5">{tender.budget}</span>
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-stone-700 block leading-none">Estimated Budget</span>
+                    <span className="text-xs font-semibold text-black block mt-1.5">{tender.budget}</span>
                   </div>
                 </div>
 
@@ -139,17 +139,17 @@ export default function VendorTenders() {
 
               {/* Action and Deadline Bar */}
               <div className="mt-5 pt-4 border-t border-steel-700/60 flex items-center justify-between">
-                <div className="flex items-center text-xs text-slate-400 space-x-1.5">
-                  <Calendar className="w-4 h-4 text-slate-500" />
-                  <span>Due Date: <span className="font-semibold text-slate-300">{tender.deadline}</span></span>
+                <div className="flex items-center text-xs text-slate-600 space-x-1.5">
+                  <Calendar className="w-4 h-4 text-slate-600" />
+                  <span>Due Date: <span className="font-semibold text-slate-600">{tender.deadline}</span></span>
                 </div>
-                
+
                 <button
                   onClick={() => navigate(`/vendor/tenders/${tender.id}`)}
                   type="button"
-                  className="py-1.5 px-3 rounded-lg bg-steel-700 hover:bg-tata-blue/20 text-xs font-bold text-white border border-steel-600 hover:border-tata-blue/40 flex items-center space-x-1.5 transition-all duration-150 focus:outline-none"
+                  className="py-1.5 px-3 rounded-lg bg-black hover:bg-slate-500 text-xs font-bold text-white border border-steel-600 hover:border-tata-blue/40 flex items-center space-x-1.5 transition-all duration-150 focus:outline-none"
                 >
-                  <Eye className="w-3.5 h-3.5" />
+                  <Eye className="w-3.5  h-3.5" />
                   <span>Inspect Details</span>
                 </button>
               </div>

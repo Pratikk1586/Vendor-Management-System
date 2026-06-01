@@ -57,7 +57,7 @@ export default function AdminAuthCodes() {
   };
 
   const getRoleBadge = (role) => {
-    return role === 'dept_head' 
+    return role === 'dept_head'
       ? <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Department Head</span>
       : <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-400 border border-purple-500/20">HR Admin</span>;
   };
@@ -66,7 +66,7 @@ export default function AdminAuthCodes() {
     {
       key: 'code',
       label: 'Onboarding Token Code',
-      render: (val) => <span className="font-mono font-bold text-white tracking-wide">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-black tracking-wide">{val}</span>,
     },
     {
       key: 'role',
@@ -108,12 +108,12 @@ export default function AdminAuthCodes() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SECURITY AUTHORIZATION</span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
             Staff Access Tokens
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 font-normal">

@@ -28,12 +28,12 @@ export default function AdminReports() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN METRICS</span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
             System-Wide Analytics & Exports
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -46,16 +46,16 @@ export default function AdminReports() {
           <button
             onClick={() => handleExport('csv')}
             type="button"
-            className="flex items-center py-2 px-4 rounded-xl text-xs font-bold border border-steel-600 hover:border-steel-500 bg-steel-800 hover:bg-steel-700 text-slate-300 hover:text-white transition-all focus:outline-none"
+            className="flex items-center py-2 px-4 rounded-xl text-xs font-bold border border-steel-600 hover:border-steel-500 bg-steel-800 hover:bg-steel-700 text-slate-700 hover:text-white transition-all focus:outline-none"
           >
             <Download className="w-4 h-4 mr-1.5" />
             CSV Export
           </button>
-          
+
           <button
             onClick={() => handleExport('pdf')}
             type="button"
-            className="flex items-center py-2 px-4 rounded-xl text-xs font-bold bg-tata-gold hover:bg-tata-amber text-steel-900 transition-all focus:outline-none shadow-lg shadow-tata-gold/10"
+            className="flex items-center py-2 px-4 rounded-xl text-xs font-bold bg-tata-gold hover:bg-tata-amber hover:text-white text-black transition-all focus:outline-none shadow-lg shadow-tata-gold/10"
           >
             <Download className="w-4 h-4 mr-1.5" />
             PDF Statement
@@ -76,7 +76,7 @@ export default function AdminReports() {
 
       {/* Main stats panel */}
       <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-xl space-y-6">
-        
+
         {/* PANEL: MEMBERS */}
         {activeTab === 'members' && (
           <div className="space-y-6">
@@ -87,15 +87,15 @@ export default function AdminReports() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Total Registered Staff</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Total Registered Staff</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">6 Accounts</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Department Heads</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Department Heads</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">3 Active</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Super Admins</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Super Admins</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">3 Active</span>
               </div>
             </div>
@@ -112,15 +112,15 @@ export default function AdminReports() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Total Partners Registered</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Total Partners Registered</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">120 Suppliers</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Active Bidders</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Active Bidders</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">80% Active Rate</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">MSME Classification</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">MSME Classification</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">28 MSME partners</span>
               </div>
             </div>
@@ -137,15 +137,15 @@ export default function AdminReports() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Total Published Tenders</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Total Published Tenders</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">12 published</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Completed Bids Evaluated</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Completed Bids Evaluated</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">8 Closed</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Live Active Bidding</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Live Active Bidding</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">4 Live</span>
               </div>
             </div>
@@ -162,15 +162,15 @@ export default function AdminReports() {
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Sourcing Cumulative Spend</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Sourcing Cumulative Spend</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">₹4.20 Cr</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Active ongoing Operations</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Active ongoing Operations</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">₹2.85 Cr</span>
               </div>
               <div className="p-4 bg-steel-900 border border-steel-700/60 rounded-xl text-center">
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Average Sourcing per Contract</span>
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-200 block leading-none">Average Sourcing per Contract</span>
                 <span className="text-2xl font-mono font-bold text-white block mt-3">₹35.00 Lakhs</span>
               </div>
             </div>

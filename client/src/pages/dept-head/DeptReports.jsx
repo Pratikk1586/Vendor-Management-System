@@ -5,7 +5,7 @@
 import { TrendingUp, DollarSign, Calendar } from 'lucide-react';
 
 export default function DeptReports() {
-  
+
   // Custom SVG Bar Chart data (spend by quarter)
   const spendData = [
     { label: 'Q3-25', val: 45, displayVal: '₹45L', height: 'h-[90px]' },
@@ -31,11 +31,11 @@ export default function DeptReports() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">DIVISION ANALYTICS</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Divisional Reports & Performance
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -44,7 +44,7 @@ export default function DeptReports() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Quarter Spend Bar Chart panel */}
         <div className="lg:col-span-2 bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-6">
           <div className="flex items-center space-x-2 border-b border-steel-700 pb-3">
@@ -55,7 +55,7 @@ export default function DeptReports() {
           {/* Sourcing Spend Graph Bar representation */}
           <div className="p-5 bg-steel-900 border border-steel-700/60 rounded-xl space-y-6">
             <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Spend Distribution (Quarterly)</span>
-            
+
             <div className="flex justify-around items-end h-64 pt-6 border-b border-steel-700 pb-2">
               {spendData.map((bar, idx) => (
                 <div key={idx} className="flex flex-col items-center group w-14">
@@ -76,7 +76,7 @@ export default function DeptReports() {
 
         {/* Right column: Tender Cycle Times & Bid Participation */}
         <div className="space-y-6">
-          
+
           {/* Tender Cycle times */}
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-5">
             <div className="flex items-center space-x-2 border-b border-steel-700 pb-2">

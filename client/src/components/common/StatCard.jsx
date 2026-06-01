@@ -35,14 +35,14 @@ export default function StatCard({
   return (
     <div
       className={clsx(
-        'rounded-xl border border-steel-600 border-l-4 bg-steel-800 p-5',
+        'rounded-xl border border-steel-600 bg-steel-800 p-5',
         color,
       )}
     >
       <div className="flex items-start justify-between">
         <div>
-          <p className="text-sm text-gray-400">{label}</p>
-          <p className="mt-1 font-display text-3xl tracking-wide text-white">{value}</p>
+          <p className="text-sm text-slate-500">{label}</p>
+          <p className="mt-1 font-display text-3xl tracking-wide text-slate-900 font-bold">{value}</p>
           {trend && trendValue && (
             <p className={clsx('mt-2 flex items-center gap-1 text-xs', trendClass)}>
               {TrendIcon && <TrendIcon size={14} />}
@@ -51,7 +51,7 @@ export default function StatCard({
           )}
         </div>
         {icon && (
-          <div className="rounded-lg bg-steel-700 p-2 text-tata-light">{icon}</div>
+          <div className="rounded-lg bg-white border border-steel-600 p-2 text-tata-light">{icon}</div>
         )}
       </div>
     </div>

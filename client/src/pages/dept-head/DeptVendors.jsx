@@ -69,7 +69,7 @@ export default function DeptVendors() {
       label: 'Supplier Details',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-black">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">ID: {row.id} | GST: {row.gst}</span>
         </div>
       ),
@@ -97,7 +97,7 @@ export default function DeptVendors() {
             <Eye className="w-3.5 h-3.5" />
             <span>Inspect</span>
           </button>
-          
+
           {row.status === 'Pending' && (
             <button
               onClick={() => handleApprove(row.id)}
@@ -136,11 +136,11 @@ export default function DeptVendors() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPPLIER DIRECTORY</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Vendor Management
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -154,7 +154,7 @@ export default function DeptVendors() {
       </div>
 
       {/* Main DataTable panel */}
-      <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl">
+      <div className="bg-white border border-steel-700/60 rounded-2xl p-5 shadow-xl">
         <DataTable
           columns={columns}
           data={filteredVendors}
@@ -168,17 +168,17 @@ export default function DeptVendors() {
           isOpen={drawerOpen}
           onClose={() => setDrawerOpen(false)}
           title={selectedVendor.name}
-          width="28rem"
+          width="38rem"
         >
           <div className="space-y-6 text-xs sm:text-sm">
-            
+
             {/* Header branding */}
             <div className="flex items-center space-x-3 pb-4 border-b border-steel-700">
               <div className="w-10 h-10 rounded-xl bg-steel-900 border border-steel-700 flex items-center justify-center text-tata-gold flex-shrink-0">
                 <Building className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="font-bold text-white leading-tight">{selectedVendor.name}</h4>
+                <h4 className="font-bold text-black leading-tight">{selectedVendor.name}</h4>
                 <div className="mt-1">{getStatusBadge(selectedVendor.status)}</div>
               </div>
             </div>
@@ -186,23 +186,23 @@ export default function DeptVendors() {
             {/* General Info list */}
             <div className="space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold">Corporate Profile</h3>
-              
+
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Registered GSTIN</span>
-                  <span className="font-mono font-bold text-slate-300 block mt-1.5">{selectedVendor.gst}</span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-800 block leading-none">Registered GSTIN</span>
+                  <span className="font-mono font-bold text-slate-400 block mt-1.5">{selectedVendor.gst}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Corporate PAN</span>
-                  <span className="font-mono font-bold text-slate-300 block mt-1.5">{selectedVendor.pan}</span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-800 block leading-none">Corporate PAN</span>
+                  <span className="font-mono font-bold text-slate-400 block mt-1.5">{selectedVendor.pan}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Onboarding Sector</span>
-                  <span className="font-semibold text-slate-300 block mt-1.5">{selectedVendor.sector}</span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-800 block leading-none">Onboarding Sector</span>
+                  <span className="font-semibold text-slate-400 block mt-1.5">{selectedVendor.sector}</span>
                 </div>
                 <div>
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Year Established</span>
-                  <span className="font-semibold text-slate-300 block mt-1.5">{selectedVendor.est}</span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-800 block leading-none">Year Established</span>
+                  <span className="font-semibold text-slate-400 block mt-1.5">{selectedVendor.est}</span>
                 </div>
               </div>
             </div>
@@ -210,8 +210,8 @@ export default function DeptVendors() {
             {/* Contact Registries */}
             <div className="space-y-3.5 pt-4 border-t border-steel-700">
               <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold">Contact Registry</h3>
-              
-              <div className="space-y-2 text-slate-300">
+
+              <div className="space-y-2 text-slate-500">
                 <div className="flex items-center space-x-2.5">
                   <Mail className="w-4 h-4 text-slate-500" />
                   <span>{selectedVendor.email}</span>
@@ -226,7 +226,7 @@ export default function DeptVendors() {
             {/* Verification Documents Ticker */}
             <div className="space-y-3 pt-4 border-t border-steel-700">
               <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold">Verification Auditing</h3>
-              
+
               <div className="p-3 bg-steel-900 border border-steel-700/60 rounded-xl space-y-2">
                 <div className="flex justify-between items-center text-xs">
                   <span className="text-slate-400">GST Registration:</span>

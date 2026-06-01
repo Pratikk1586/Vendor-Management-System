@@ -19,7 +19,7 @@ export default function AdminSettings() {
   const handleSaveSettings = (e) => {
     e.preventDefault();
     setLoading(true);
-    
+
     // Simulate API delay
     setTimeout(() => {
       setLoading(false);
@@ -30,11 +30,12 @@ export default function AdminSettings() {
 
   return (
     <div className="space-y-6 font-body max-w-4xl mx-auto">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN SETTINGS</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900
+         mt-1">
           Global Portal Configuration
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -49,7 +50,7 @@ export default function AdminSettings() {
       )}
 
       <form onSubmit={handleSaveSettings} className="space-y-6">
-        
+
         {/* Registration Controls & Announcement */}
         <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-4">
           <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold border-b border-steel-700 pb-2">
@@ -59,7 +60,7 @@ export default function AdminSettings() {
           <div className="space-y-4">
             <div className="flex items-center justify-between p-3.5 bg-steel-900/40 border border-steel-700/60 rounded-xl text-xs sm:text-sm">
               <div>
-                <h4 className="font-semibold text-white">Vendor Self-Registration</h4>
+                <h4 className="font-semibold text-black">Vendor Self-Registration</h4>
                 <p className="text-xs text-slate-500 mt-1 leading-normal">Allows external supplier portals to submit onboarding profiles.</p>
               </div>
               <button
@@ -72,7 +73,7 @@ export default function AdminSettings() {
             </div>
 
             <div>
-              <label htmlFor="announcement" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="announcement" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 Live Announcement Banner text
               </label>
               <textarea
@@ -94,7 +95,7 @@ export default function AdminSettings() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs sm:text-sm">
             <div>
-              <label htmlFor="gold-threshold" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="gold-threshold" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 Gold Tier Score Bound *
               </label>
               <input
@@ -108,7 +109,7 @@ export default function AdminSettings() {
             </div>
 
             <div>
-              <label htmlFor="platinum-threshold" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="platinum-threshold" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 Platinum Tier Score Bound *
               </label>
               <input
@@ -131,7 +132,7 @@ export default function AdminSettings() {
 
           <div className="space-y-4 text-xs sm:text-sm">
             <div>
-              <label htmlFor="smtp" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="smtp" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                 SMTP Relay Host *
               </label>
               <input

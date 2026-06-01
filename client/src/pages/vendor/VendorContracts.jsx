@@ -44,54 +44,52 @@ export default function VendorContracts() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">PROCUREMENT REGISTER</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-700 mt-1">
           My Active Contracts
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 font-normal">
+        <p className="text-xs sm:text-sm text-gray-500 font-normal">
           Inspect corporate procurement contracts, track delivery milestones, and check compliance terms.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Side: Contracts Register List */}
         <div className={selectedContract ? 'lg:col-span-2 space-y-4' : 'lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-5'}>
           {mockContracts.map((contract) => (
             <div
               key={contract.id}
               onClick={() => setSelectedContract(contract)}
-              className={`p-5 bg-steel-800 border rounded-2xl shadow-xl hover:border-tata-blue/45 cursor-pointer flex flex-col justify-between transition-all duration-150 ${
-                selectedContract?.id === contract.id ? 'border-tata-blue ring-1 ring-tata-blue/20' : 'border-steel-700/60'
-              }`}
+              className={`p-5 bg-steel-800 border rounded-2xl shadow-xl hover:border-tata-blue/45 cursor-pointer flex flex-col justify-between transition-all duration-150 ${selectedContract?.id === contract.id ? 'border-tata-blue ring-1 ring-tata-blue/20' : 'border-steel-700/60'
+                }`}
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="px-2 py-0.5 rounded bg-steel-900 border border-steel-700 font-mono font-bold text-[10px] text-tata-gold">
                     {contract.id}
                   </span>
-                  <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${
-                    contract.status === 'Active' 
-                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse' 
-                      : 'bg-slate-500/15 text-slate-400 border border-steel-600'
-                  }`}>
+                  <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${contract.status === 'Active'
+                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 animate-pulse'
+                    : 'bg-slate-500/15 text-slate-400 border border-steel-600'
+                    }`}>
                     {contract.status}
                   </span>
                 </div>
 
-                <h3 className="text-sm sm:text-base font-bold text-white leading-snug">{contract.title}</h3>
+                <h3 className="text-sm sm:text-base font-bold text-black leading-snug">{contract.title}</h3>
 
                 <div className="grid grid-cols-2 gap-2.5 p-3 bg-steel-900/30 border border-steel-700/50 rounded-xl text-xs">
                   <div>
-                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500">Contract Value</span>
-                    <span className="block font-bold text-white mt-1">{contract.value}</span>
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-600">Contract Value</span>
+                    <span className="block font-bold text-black mt-1">{contract.value}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500">Linked Tender</span>
-                    <span className="block font-semibold text-slate-300 mt-1">{contract.tenderId}</span>
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-600">Linked Tender</span>
+                    <span className="block font-semibold text-black mt-1">{contract.tenderId}</span>
                   </div>
                 </div>
               </div>
@@ -115,16 +113,16 @@ export default function VendorContracts() {
         {/* Right Side: Milestones details sheet */}
         {selectedContract && (
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-5 h-fit animate-slideRight">
-            
+
             <div className="border-b border-steel-700 pb-3 flex items-start justify-between">
               <div>
                 <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">MILESTONES SUMMARY</span>
-                <h3 className="text-sm font-bold text-white mt-1 leading-none">{selectedContract.id} Schedules</h3>
+                <h3 className="text-sm font-bold text-black mt-1 leading-none">{selectedContract.id} Schedules</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedContract(null)}
-                className="text-xs text-slate-400 hover:text-white font-bold focus:outline-none"
+                className="text-xs text-slate-400 hover:text-black font-bold focus:outline-none"
               >
                 Close details
               </button>
@@ -134,11 +132,10 @@ export default function VendorContracts() {
               {selectedContract.milestones.map((milestone, idx) => (
                 <div
                   key={idx}
-                  className={`p-3 rounded-xl border flex items-start space-x-3.5 transition-colors ${
-                    milestone.complete
-                      ? 'bg-emerald-500/5 border-emerald-500/25 text-slate-300'
-                      : 'bg-steel-900/30 border-steel-700 text-slate-400'
-                  }`}
+                  className={`p-3 rounded-xl border flex items-start space-x-3.5 transition-colors ${milestone.complete
+                    ? 'bg-emerald-500/5 border-emerald-500/25 text-slate-300'
+                    : 'bg-steel-900/30 border-steel-700 text-slate-400'
+                    }`}
                 >
                   <div className="mt-0.5 flex-shrink-0">
                     {milestone.complete ? (
@@ -149,7 +146,7 @@ export default function VendorContracts() {
                   </div>
 
                   <div className="space-y-1">
-                    <h4 className={`text-xs font-semibold ${milestone.complete ? 'text-white' : 'text-slate-300'}`}>{milestone.label}</h4>
+                    <h4 className={`text-xs font-semibold ${milestone.complete ? 'text-black' : 'text-slate-800'}`}>{milestone.label}</h4>
                     <div className="flex items-center space-x-1.5 text-[10px] text-slate-500">
                       <Calendar className="w-3.5 h-3.5" />
                       <span>Target: <span className="font-semibold text-slate-400">{milestone.date}</span></span>

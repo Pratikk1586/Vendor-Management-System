@@ -108,15 +108,12 @@ export default function RegisterPage() {
   const steps = getFlowSteps();
 
   return (
-    <div className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-body">
+    <div className="flex-grow flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 font-body">
       <div className="max-w-4xl w-full space-y-8 flex flex-col items-center">
-        
+
         {/* Registration Header */}
         <div className="flex flex-col items-center">
-          <div className="w-14 h-14 bg-gradient-to-br from-tata-gold to-tata-amber rounded-2xl flex items-center justify-center font-display text-2xl text-steel-900 font-extrabold shadow-lg shadow-tata-gold/10 mb-3 flex-shrink-0">
-            TS
-          </div>
-          <h1 className="text-xl font-display tracking-widest text-white uppercase text-center">
+          <h1 className="text-xl font-display tracking-widest text-blue uppercase text-center">
             Partner Workspace Setup
           </h1>
           <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400">

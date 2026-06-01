@@ -17,7 +17,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen bg-sky-950 overflow-hidden flex items-center justify-center pt-24 pb-16 font-body text-slate-800">
+    <section id="about" className="relative min-h-screen bg-sky-950 overflow-hidden flex items-center justify-center pt-24 pb-16 font-body text-slate-800">
 
       {/* Self-contained custom animations styling */}
       <style dangerouslySetInnerHTML={{
@@ -91,14 +91,6 @@ export default function HeroSection() {
             <Search className="w-4.5 h-4.5 mr-2.5 text-tata-blue" />
             View Active Tenders
           </button>
-        </div>
-
-      </div>
-
-      {/* Decorative Slide-down Chevron indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce opacity-40 hidden sm:block">
-        <div className="w-6 h-10 rounded-full border-2 border-slate-400 flex items-start justify-center p-1.5">
-          <div className="w-1.5 h-1.5 bg-slate-300 rounded-full animate-scrollIndicator" />
         </div>
       </div>
     </section>

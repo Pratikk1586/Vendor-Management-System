@@ -23,13 +23,13 @@ export default function Tabs({ tabs, activeTab, onChange }) {
           className={clsx(
             'relative px-4 py-2.5 text-sm font-medium transition-colors',
             activeTab === tab.id
-              ? 'text-tata-light'
-              : 'text-gray-400 hover:text-gray-200',
+              ? 'text-black'
+              : 'text-gray-500 hover:text-black',
           )}
         >
           {tab.label}
           {tab.count !== undefined && (
-            <span className="ml-2 rounded-full bg-steel-600 px-2 py-0.5 text-xs">
+            <span className="ml-2 rounded-full bg-slate-600 px-2 py-0.5 text-xs text-white">
               {tab.count}
             </span>
           )}

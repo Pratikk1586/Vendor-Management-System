@@ -31,14 +31,14 @@ export default function AdminAuditLog() {
     {
       key: 'id',
       label: 'Log Ref',
-      render: (val) => <span className="font-mono font-bold text-white">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-black">{val}</span>,
     },
     {
       key: 'username',
       label: 'Portal Session / Role',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-tata-gold">{val}</span>
           <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 font-bold">{row.role}</span>
         </div>
       ),
@@ -46,7 +46,7 @@ export default function AdminAuditLog() {
     {
       key: 'action',
       label: 'Administrative Operations Action',
-      render: (val) => <span className="font-medium text-slate-300 leading-normal">{val}</span>,
+      render: (val) => <span className="font-medium text-slate-800 leading-normal">{val}</span>,
     },
     {
       key: 'timestamp',
@@ -71,12 +71,12 @@ export default function AdminAuditLog() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">COMPLIANCE REGISTER</span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
             System Audit Log
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 font-normal">

@@ -68,7 +68,7 @@ export default function AdminMemberDetail() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header bar */}
       <div className="flex items-center space-x-2 border-b border-steel-700/60 pb-5">
         <button
@@ -80,7 +80,7 @@ export default function AdminMemberDetail() {
         </button>
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">MEMBER REFERENCE: {id}</span>
-          <h1 className="text-xl sm:text-2xl font-bold text-white mt-0.5">Manage Member Credentials</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">Manage Member Credentials</h1>
         </div>
       </div>
 
@@ -90,11 +90,11 @@ export default function AdminMemberDetail() {
       </div>
 
       <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-xl max-w-3xl">
-        
+
         {/* PANEL 1: PROFILE MANAGEMENT */}
         {activeTab === 'profile' && (
           <form onSubmit={handleProfileSave} className="space-y-6">
-            
+
             <div className="flex items-center space-x-2 border-b border-steel-700 pb-3">
               <User className="w-5 h-5 text-tata-gold" />
               <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold">Member Profile Details</h3>
@@ -108,7 +108,7 @@ export default function AdminMemberDetail() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
-                <label htmlFor="name-input" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="name-input" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                   Display / Company Name *
                 </label>
                 <input
@@ -122,7 +122,7 @@ export default function AdminMemberDetail() {
               </div>
 
               <div>
-                <label htmlFor="email-input" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="email-input" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                   Official Email Address *
                 </label>
                 <input
@@ -136,7 +136,7 @@ export default function AdminMemberDetail() {
               </div>
 
               <div>
-                <label htmlFor="role-select" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="role-select" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                   Access Role Level *
                 </label>
                 <select
@@ -152,7 +152,7 @@ export default function AdminMemberDetail() {
               </div>
 
               <div>
-                <label htmlFor="status-select" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="status-select" className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">
                   Account Status *
                 </label>
                 <select
@@ -169,15 +169,15 @@ export default function AdminMemberDetail() {
             </div>
 
             <div className="pt-6 border-t border-steel-700/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              
+
               {/* Extra Security buttons */}
               <div className="flex space-x-2">
                 <button
                   onClick={handleResetPw}
                   type="button"
-                  className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-300 hover:text-white transition-colors focus:outline-none flex items-center"
+                  className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-500 hover:text-black hover:bg-gray-400 transition-colors focus:outline-none flex items-center"
                 >
-                  <KeyRound className="w-3.5 h-3.5 mr-1.5 text-slate-400" />
+                  <KeyRound className="w-3.5 h-3.5 mr-1.5 text-slate-600" />
                   {pwSuccess ? 'Password Reset Issued!' : 'Reset Password'}
                 </button>
                 <button
@@ -216,13 +216,13 @@ export default function AdminMemberDetail() {
               {mockAuditLogs.map((log) => (
                 <div key={log.id} className="p-4 rounded-xl bg-steel-900/40 border border-steel-700/60 flex items-start justify-between gap-4">
                   <div className="space-y-1">
-                    <p className="text-xs sm:text-sm font-semibold text-white">{log.action}</p>
+                    <p className="text-xs sm:text-sm font-semibold text-black">{log.action}</p>
                     <div className="flex items-center text-[10px] text-slate-500 space-x-3.5 font-mono">
                       <span className="flex items-center"><Calendar className="w-3 h-3 mr-1" />{log.date}</span>
                       <span className="flex items-center"><Clock className="w-3 h-3 mr-1" />{log.time}</span>
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono text-slate-500 select-all">{log.ip}</span>
+                  <span className="text-[10px] font-mono text-white select-all">{log.ip}</span>
                 </div>
               ))}
             </div>

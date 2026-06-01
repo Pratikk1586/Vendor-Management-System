@@ -53,7 +53,7 @@ export default function DeptHeadLayout() {
 
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-steel-900 text-slate-700 font-body">
-      
+
       {/* Desktop Sidebar */}
       <Sidebar navItems={deptNavItems} />
 
@@ -66,12 +66,12 @@ export default function DeptHeadLayout() {
 
       {/* Main Workspace Frame */}
       <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        
+
         {/* Workspace Top Header Bar */}
         <TopNavbar onMobileMenuToggle={() => setMobileNavOpen(true)} />
 
         {/* Scrollable Work Viewport */}
-        <main className="flex-1 overflow-y-auto bg-steel-900 p-4 sm:p-6 lg:p-8 custom-scrollbar">
+        <main className="flex-1 overflow-y-auto bg-white p-4 sm:p-6 lg:p-8 custom-scrollbar">
           <div className="max-w-7xl mx-auto">
             <Outlet />
           </div>

@@ -14,7 +14,7 @@ export default function VendorTenderDetail() {
   const [deliveryDays, setDeliveryDays] = useState('');
   const [remarks, setRemarks] = useState('');
   const [uploadedFile, setUploadedFile] = useState(null);
-  
+
   // Submit state management
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -49,7 +49,7 @@ export default function VendorTenderDetail() {
       setError('Please complete all pricing inputs and attach a technical specification sheet.');
       return;
     }
-    
+
     setLoading(true);
     setError('');
 
@@ -62,30 +62,30 @@ export default function VendorTenderDetail() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Detail Header Action Bar */}
       <div className="flex items-center space-x-2 border-b border-steel-700/60 pb-5">
         <button
           onClick={() => navigate('/vendor/tenders')}
           type="button"
-          className="p-2 rounded-lg bg-steel-800 hover:bg-steel-700 border border-steel-700 hover:border-steel-600 text-slate-300 hover:text-white transition-colors focus:outline-none"
+          className="p-2 rounded-lg bg-stone-700 hover:bg-stone-400 border border-stone-700 hover:border-steel-600 text-slate-300 hover:text-white transition-colors focus:outline-none"
         >
           <ArrowLeft className="w-4 h-4" />
         </button>
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">OPPORTUNITY CODE: {id}</span>
-          <h1 className="text-xl sm:text-2xl font-bold text-white mt-0.5">Tender Analysis</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">Tender Analysis</h1>
         </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left 2 Columns: Tender Info Panel */}
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-xl space-y-5">
-            
+
             <div>
-              <h2 className="text-lg sm:text-xl font-bold text-white leading-snug">
+              <h2 className="text-lg sm:text-xl font-bold text-black leading-snug">
                 {mockTenderDetails.title}
               </h2>
               <span className="text-xs text-tata-gold font-medium mt-1 block">
@@ -96,33 +96,33 @@ export default function VendorTenderDetail() {
             {/* Quick Metrics Cards */}
             <div className="grid grid-cols-3 gap-4 p-4 bg-steel-900/40 border border-steel-700/60 rounded-xl text-center">
               <div>
-                <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Estimated Budget</span>
-                <span className="text-sm font-semibold text-tata-gold block mt-2">{mockTenderDetails.budget}</span>
+                <span className="text-[9px] uppercase font-mono tracking-widest text-stone-700 block leading-none">Estimated Budget</span>
+                <span className="text-sm font-semibold text-black block mt-2">{mockTenderDetails.budget}</span>
               </div>
               <div>
-                <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Target Delivery</span>
-                <span className="text-sm font-semibold text-white block mt-2">{mockTenderDetails.location}</span>
+                <span className="text-[9px] uppercase font-mono tracking-widest text-stone-700 block leading-none">Target Delivery</span>
+                <span className="text-sm font-semibold text-black block mt-2">{mockTenderDetails.location}</span>
               </div>
               <div>
-                <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Submission Due</span>
+                <span className="text-[9px] uppercase font-mono tracking-widest text-stone-700 block leading-none">Submission Due</span>
                 <span className="text-sm font-semibold text-red-400 block mt-2">{mockTenderDetails.deadline}</span>
               </div>
             </div>
 
             {/* Sourcing Specifications Description */}
             <div className="space-y-2">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Materials Overview</h3>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+              <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold">Materials Overview</h3>
+              <p className="text-xs sm:text-sm text-black leading-relaxed font-normal">
                 {mockTenderDetails.description}
               </p>
             </div>
 
             {/* Detailed specs bullet lists */}
             <div className="space-y-3 pt-4 border-t border-steel-700/60">
-              <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Technical Parameters</h3>
+              <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold">Technical Parameters</h3>
               <ul className="space-y-2">
                 {mockTenderDetails.specs.map((spec, index) => (
-                  <li key={index} className="flex items-start text-xs sm:text-sm text-slate-400 space-x-2">
+                  <li key={index} className="flex items-start text-xs sm:text-sm text-black space-x-2">
                     <ChevronRight className="w-4 h-4 text-tata-gold flex-shrink-0 mt-0.5" />
                     <span>{spec}</span>
                   </li>
@@ -136,13 +136,13 @@ export default function VendorTenderDetail() {
         {/* Right 1 Column: Interactive Bid Submission Form */}
         <div className="space-y-6">
           {isSubmitted ? (
-            
+
             /* Success confirmation panel */
             <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl text-center space-y-6 flex flex-col items-center">
               <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/10 flex-shrink-0 animate-scaleUp">
                 <CheckCircle2 className="w-7 h-7 text-emerald-400" />
               </div>
-              
+
               <div>
                 <h3 className="text-lg font-bold text-white uppercase tracking-wide">Bid Logged Successfully</h3>
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block mt-1">Status: UNDER EVALUATION</span>
@@ -172,7 +172,7 @@ export default function VendorTenderDetail() {
               </button>
             </div>
           ) : (
-            
+
             /* Sourcing Form Panel */
             <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-4">
               <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold border-b border-steel-700 pb-2">
@@ -180,10 +180,10 @@ export default function VendorTenderDetail() {
               </h3>
 
               <form onSubmit={handleBidSubmit} className="space-y-4">
-                
+
                 {/* Proposal Price input */}
                 <div>
-                  <label htmlFor="price-prop" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label htmlFor="price-prop" className="block text-xs font-bold uppercase tracking-wider text-black mb-1.5">
                     Bid Amount (INR) *
                   </label>
                   <input
@@ -193,13 +193,13 @@ export default function VendorTenderDetail() {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                     placeholder="e.g. 4500000"
-                    className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
+                    className="block w-full px-4 py-2.5 rounded-xl hover:bg-steel-900/30 bg-white border border-steel-700/80 text-black placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
                   />
                 </div>
 
                 {/* Delivery schedule time in days */}
                 <div>
-                  <label htmlFor="lead-days" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label htmlFor="lead-days" className="block text-xs font-bold uppercase tracking-wider text-black mb-1.5">
                     Lead Delivery Period (Days) *
                   </label>
                   <input
@@ -209,14 +209,14 @@ export default function VendorTenderDetail() {
                     value={deliveryDays}
                     onChange={(e) => setDeliveryDays(e.target.value)}
                     placeholder="e.g. 15"
-                    className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
+                    className="block w-full px-4 py-2.5 rounded-xl hover:bg-steel-900/30 bg-white border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
                   />
                 </div>
 
                 {/* Upload Zone */}
                 <div>
-                  <span className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Technical Specification Sheets *</span>
-                  <div className="relative border border-dashed border-steel-700 hover:border-steel-500 bg-steel-900/30 rounded-xl p-3.5 flex flex-col items-center justify-center text-center transition-colors">
+                  <span className="block text-xs font-bold uppercase tracking-wider text-black mb-2">Technical Specification Sheets *</span>
+                  <div className="relative border border-dashed border-steel-700 hover:border-steel-500 hover:bg-steel-900/30 rounded-xl p-3.5 flex flex-col items-center justify-center text-center transition-colors">
                     {uploadedFile ? (
                       <div className="flex items-center justify-between w-full">
                         <span className="text-xs text-white truncate max-w-[120px] font-semibold">{uploadedFile}</span>
@@ -225,7 +225,7 @@ export default function VendorTenderDetail() {
                     ) : (
                       <label htmlFor="proposal-file" className="cursor-pointer py-1.5">
                         <Upload className="w-5 h-5 text-slate-400 mx-auto mb-1" />
-                        <span className="text-[11px] text-slate-300 font-medium block">Click to select PDF</span>
+                        <div className="text-[11px] text-black font-medium block">Click to select PDF</div>
                         <input id="proposal-file" type="file" accept=".pdf" onChange={handleFileChange} className="hidden" />
                       </label>
                     )}
@@ -234,7 +234,7 @@ export default function VendorTenderDetail() {
 
                 {/* Remarks/Optional Box */}
                 <div>
-                  <label htmlFor="remarks-text" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label htmlFor="remarks-text" className="block text-xs font-bold uppercase tracking-wider text-black mb-1.5">
                     Proposal Remarks (Optional)
                   </label>
                   <textarea
@@ -243,7 +243,7 @@ export default function VendorTenderDetail() {
                     onChange={(e) => setRemarks(e.target.value)}
                     rows={2.5}
                     placeholder="Add any specific details..."
-                    className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-tata-blue transition-colors resize-none"
+                    className="block w-full px-4 py-2.5 rounded-xl hover:bg-steel-900/30 bg-white border border-steel-700/80 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-tata-blue transition-colors resize-none"
                   />
                 </div>
 
@@ -258,7 +258,7 @@ export default function VendorTenderDetail() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full py-3 rounded-xl bg-gradient-to-r from-tata-blue to-tata-light text-sm font-semibold text-white shadow-lg hover:shadow-tata-blue/30 transition-all focus:outline-none flex items-center justify-center"
+                  className="w-full py-3 rounded-xl bg-white border border-steel-700/80 text-sm font-semibold text-black shadow-lg hover:bg-slate-400 transition-all focus:outline-none flex items-center justify-center"
                 >
                   {loading ? 'Logging Bid Proposal...' : 'Transmit Proposal Bid'}
                 </button>

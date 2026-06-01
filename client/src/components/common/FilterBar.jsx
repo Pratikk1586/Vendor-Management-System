@@ -30,8 +30,8 @@ export default function FilterBar({ filters, values = {}, onChange, onReset }) {
                 className={clsx(
                   'rounded-full px-3 py-1 text-xs font-medium transition-colors',
                   values[filter.key] === opt.value
-                    ? 'bg-tata-blue text-white'
-                    : 'bg-steel-700 text-gray-300 hover:bg-steel-600',
+                    ? 'bg-steel-700 text-gray-300 hover:text-white'
+                    : 'bg-zinc-300 text-black hover:bg-steel-600 hover:text-white',
                 )}
               >
                 {opt.label}
@@ -41,7 +41,7 @@ export default function FilterBar({ filters, values = {}, onChange, onReset }) {
         </div>
       ))}
       {onReset && (
-        <Button variant="ghost" size="sm" icon={<RotateCcw size={14} />} onClick={onReset}>
+        <Button className="bg-zinc-300 !text-black hover:bg-steel-600 hover:!text-white" variant="ghost" size="sm" icon={<RotateCcw size={14} />} onClick={onReset}>
           Reset
         </Button>
       )}

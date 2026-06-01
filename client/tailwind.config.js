@@ -9,10 +9,10 @@ export default {
     extend: {
       colors: {
         steel: {
-          900: '#f8fafc', // slate-50 background
-          800: '#ffffff', // white panels
-          700: '#082f49', // sky-950 sidebar background
-          600: '#0c4a6e', // sky-900 sidebar hovers & borders
+          900: '#082f49', // sky-950 viewport background
+          800: '#ffffff', // white panel card containers
+          700: '#031b2e', // sky-1000 dark sidebar background
+          600: '#0c4a6e', // sky-900 hover state
         },
         tata: {
           blue: '#003087',

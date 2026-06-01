@@ -59,14 +59,14 @@ export default function VendorProfile() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Profile Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">WORKSPACE PROFILE</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-700 mt-1">
           {mockCompany.companyName}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 font-normal">
+        <p className="text-xs sm:text-sm text-gray-500 font-normal">
           Manage corporate credentials, document validations, and view divisional compliance evaluations.
         </p>
       </div>
@@ -78,7 +78,7 @@ export default function VendorProfile() {
 
       {/* Tab Panels */}
       <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-xl">
-        
+
         {/* PANEL 1: COMPANY INFO */}
         {activeTab === 'info' && (
           <div className="space-y-6">
@@ -90,27 +90,27 @@ export default function VendorProfile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="space-y-1">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Legal Company Name</span>
-                <span className="text-sm font-semibold text-white block mt-1.5">{mockCompany.companyName}</span>
+                <span className="text-sm font-semibold text-black block mt-1.5">{mockCompany.companyName}</span>
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Registered GSTIN</span>
-                <span className="text-sm font-mono font-bold text-white block mt-1.5">{mockCompany.gstNumber}</span>
+                <span className="text-sm font-mono font-bold text-black block mt-1.5">{mockCompany.gstNumber}</span>
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Company Permanent Account Number (PAN)</span>
-                <span className="text-sm font-mono font-bold text-white block mt-1.5">{mockCompany.panNumber}</span>
+                <span className="text-sm font-mono font-bold text-black block mt-1.5">{mockCompany.panNumber}</span>
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Year Established</span>
-                <span className="text-sm font-semibold text-white block mt-1.5">{mockCompany.yearEstablished}</span>
+                <span className="text-sm font-semibold text-black block mt-1.5">{mockCompany.yearEstablished}</span>
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Company Structure</span>
-                <span className="text-sm font-semibold text-white block mt-1.5">{mockCompany.companyType}</span>
+                <span className="text-sm font-semibold text-black block mt-1.5">{mockCompany.companyType}</span>
               </div>
               <div className="space-y-1">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Primary Industry Sector</span>
-                <span className="text-sm font-semibold text-white block mt-1.5">{mockCompany.industrySector}</span>
+                <span className="text-sm font-semibold text-black block mt-1.5">{mockCompany.industrySector}</span>
               </div>
               <div className="space-y-1 sm:col-span-2">
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Official Website URL</span>
@@ -144,17 +144,17 @@ export default function VendorProfile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div className="p-4 rounded-xl bg-steel-900/40 border border-steel-700/60 space-y-3.5">
                 <div className="border-b border-steel-700 pb-2.5">
-                  <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">Primary Sourcing Representative</span>
-                  <h4 className="text-base font-bold text-white mt-1">{mockContacts.primaryName}</h4>
-                  <span className="text-xs text-slate-400 font-medium">{mockContacts.primaryDesignation}</span>
+                  <span className="text-[10px] uppercase font-mono tracking-widest text-slate-800">Primary Sourcing Representative</span>
+                  <h4 className="text-base font-bold text-black mt-1">{mockContacts.primaryName}</h4>
+                  <span className="text-xs text-white font-medium">{mockContacts.primaryDesignation}</span>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center text-xs text-slate-300 space-x-2.5">
-                    <Mail className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                  <div className="flex items-center text-xs text-white space-x-2.5">
+                    <Mail className="w-4 h-4 text-white flex-shrink-0" />
                     <span>{mockContacts.primaryEmail}</span>
                   </div>
-                  <div className="flex items-center text-xs text-slate-300 space-x-2.5">
-                    <Phone className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                  <div className="flex items-center text-xs text-white space-x-2.5">
+                    <Phone className="w-4 h-4 text-white flex-shrink-0" />
                     <span>{mockContacts.primaryMobile}</span>
                   </div>
                 </div>
@@ -162,31 +162,31 @@ export default function VendorProfile() {
 
               <div className="p-4 rounded-xl bg-steel-900/40 border border-steel-700/60 space-y-3.5">
                 <div className="border-b border-steel-700 pb-2.5">
-                  <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Alternate Contact Representative</span>
-                  <h4 className="text-base font-bold text-white mt-1">{mockContacts.altName}</h4>
-                  <span className="text-xs text-slate-400 font-medium">Operations Partner</span>
+                  <span className="text-[10px] uppercase font-mono tracking-widest text-slate-800">Alternate Contact Representative</span>
+                  <h4 className="text-base font-bold text-black mt-1">{mockContacts.altName}</h4>
+                  <span className="text-xs text-white font-medium">Operations Partner</span>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex items-center text-xs text-slate-300 space-x-2.5">
-                    <Phone className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                  <div className="flex items-center text-xs text-white space-x-2.5">
+                    <Phone className="w-4 h-4 text-white flex-shrink-0" />
                     <span>{mockContacts.altMobile}</span>
                   </div>
                 </div>
               </div>
 
               <div className="sm:col-span-2 p-4 rounded-xl bg-steel-900/40 border border-steel-700/60 flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-slate-400 mt-1 flex-shrink-0" />
+                <MapPin className="w-5 h-5 text-white mt-1 flex-shrink-0" />
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Registered Office Address</span>
-                  <p className="text-sm font-medium text-slate-300 leading-relaxed mt-1.5">{mockContacts.address}</p>
+                  <span className="text-[10px] uppercase font-mono tracking-widest text-slate-800">Registered Office Address</span>
+                  <p className="text-sm font-medium text-white leading-relaxed mt-1.5">{mockContacts.address}</p>
                 </div>
               </div>
             </div>
 
             <div className="pt-4 border-t border-steel-700/60">
               <div className="flex items-center space-x-2 mb-3.5">
-                <Tag className="w-4 h-4 text-slate-400" />
-                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Operational Locations</span>
+                <Tag className="w-4 h-4 text-white" />
+                <span className="text-[10px] uppercase font-mono tracking-widest text-slate-800">Operational Locations</span>
               </div>
               <div className="flex flex-wrap gap-2">
                 {mockContacts.locations.map((loc, idx) => (
@@ -211,10 +211,10 @@ export default function VendorProfile() {
               {mockDocs.map((doc, idx) => (
                 <div key={idx} className="flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-xl bg-steel-900/40 border border-steel-700/60 gap-4">
                   <div className="space-y-1">
-                    <h4 className="text-sm font-semibold text-white">{doc.name}</h4>
-                    <div className="flex items-center text-xs text-slate-400 space-x-2.5">
+                    <h4 className="text-sm font-semibold text-black">{doc.name}</h4>
+                    <div className="flex items-center text-xs text-slate-500 space-x-2.5">
                       <Calendar className="w-3.5 h-3.5 text-slate-500" />
-                      <span>Valid Till: <span className="font-semibold text-slate-300">{doc.expiry}</span></span>
+                      <span>Valid Till: <span className="font-semibold text-white">{doc.expiry}</span></span>
                     </div>
                   </div>
 
@@ -241,7 +241,7 @@ export default function VendorProfile() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
+
               {/* Active Tier */}
               <div className="p-5 rounded-2xl bg-steel-900 border border-steel-700 flex flex-col justify-center items-center text-center space-y-4">
                 <ShieldCheck className="w-14 h-14 text-tata-gold flex-shrink-0 animate-pulse" />
@@ -250,7 +250,7 @@ export default function VendorProfile() {
                   <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold block mt-1">Level 2 Qualified Partner</span>
                 </div>
                 <div className="p-3 border border-steel-700/60 rounded-xl bg-steel-800/40 w-full text-center">
-                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Cumulative Sourcing Score</span>
+                  <span className="text-[9px] uppercase font-mono tracking-widest text-slate-800 block leading-none">Cumulative Sourcing Score</span>
                   <span className="text-2xl font-mono font-bold text-white block mt-2">{mockPerformance.points} / 1000</span>
                 </div>
               </div>
@@ -281,7 +281,7 @@ export default function VendorProfile() {
             {/* Testimonials notes */}
             <div className="p-4 rounded-xl bg-emerald-500/5 border border-emerald-500/25 flex items-start space-x-3">
               <CheckCircle2 className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+              <p className="text-xs sm:text-sm text-slate-800 leading-relaxed font-normal">
                 Your performance score is within the **Gold Tier** band. This grants prioritized payment processing terms, material sourcing access on active bidding events, and an authorization ticket for specialized engineering tenders.
               </p>
             </div>

@@ -71,11 +71,11 @@ export default function AdminApprovals() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">WORKFLOW REGISTRY</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Pending Approvals Queue
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -95,7 +95,7 @@ export default function AdminApprovals() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-        
+
         {/* PANEL: VENDORS */}
         {activeTab === 'vendors' && (
           vendors.length > 0 ? (
@@ -107,17 +107,17 @@ export default function AdminApprovals() {
                     {getDelayBadge(v.daysPending)}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-white leading-tight">{v.name}</h4>
+                    <h4 className="text-base font-bold text-black leading-tight">{v.name}</h4>
                     <span className="text-[10px] font-mono text-slate-500">{v.email}</span>
                   </div>
                   <div className="p-3 bg-steel-900/40 border border-steel-700/60 rounded-xl text-xs space-y-2">
                     <div>
-                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Sector</span>
-                      <span className="font-semibold text-slate-300 block mt-1.5">{v.sector}</span>
+                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Sector</span>
+                      <span className="font-semibold text-white block mt-1.5">{v.sector}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Attached Documents</span>
-                      <span className="font-semibold text-tata-light block mt-1.5">{v.docs.join(', ')}</span>
+                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Attached Documents</span>
+                      <span className="font-semibold text-white block mt-1.5">{v.docs.join(', ')}</span>
                     </div>
                   </div>
                 </div>
@@ -131,11 +131,11 @@ export default function AdminApprovals() {
                     <X className="w-4 h-4 mr-1.5" />
                     Decline
                   </button>
-                  
+
                   <button
                     onClick={() => handleApprove('vendors', v.id, v.name)}
                     type="button"
-                    className="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-xs font-bold text-white transition-colors focus:outline-none flex items-center justify-center shadow-lg shadow-emerald-500/10"
+                    className="flex-1 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-xs font-bold text-slate-900 transition-colors focus:outline-none flex items-center justify-center shadow-lg shadow-emerald-500/10"
                   >
                     <Check className="w-4 h-4 mr-1.5" />
                     Approve
@@ -161,23 +161,23 @@ export default function AdminApprovals() {
                     {getDelayBadge(d.daysPending)}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-white leading-tight">{d.name}</h4>
+                    <h4 className="text-base font-bold text-slate-900 leading-tight">{d.name}</h4>
                     <span className="text-[10px] font-mono text-slate-500">{d.email}</span>
                   </div>
                   <div className="p-3 bg-steel-900/40 border border-steel-700/60 rounded-xl text-xs space-y-2">
                     <div className="grid grid-cols-2 gap-2">
                       <div>
-                        <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Department</span>
-                        <span className="font-semibold text-slate-300 block mt-1.5">{d.dept}</span>
+                        <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Department</span>
+                        <span className="font-semibold text-white block mt-1.5">{d.dept}</span>
                       </div>
                       <div>
-                        <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Designation</span>
-                        <span className="font-semibold text-slate-300 block mt-1.5">{d.designation}</span>
+                        <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Designation</span>
+                        <span className="font-semibold text-white block mt-1.5">{d.designation}</span>
                       </div>
                     </div>
                     <div>
-                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Employee Verification files</span>
-                      <span className="font-semibold text-tata-light block mt-1.5">{d.docs.join(', ')}</span>
+                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Employee Verification files</span>
+                      <span className="font-semibold text-white block mt-1.5">{d.docs.join(', ')}</span>
                     </div>
                   </div>
                 </div>
@@ -220,17 +220,17 @@ export default function AdminApprovals() {
                     {getDelayBadge(a.daysPending)}
                   </div>
                   <div>
-                    <h4 className="text-base font-bold text-white leading-tight">{a.name}</h4>
+                    <h4 className="text-base font-bold text-slate-900 leading-tight">{a.name}</h4>
                     <span className="text-[10px] font-mono text-slate-500">{a.email}</span>
                   </div>
                   <div className="p-3 bg-steel-900/40 border border-steel-700/60 rounded-xl text-xs space-y-2">
                     <div>
-                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Designation</span>
-                      <span className="font-semibold text-slate-300 block mt-1.5">{a.designation}</span>
+                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Designation</span>
+                      <span className="font-semibold text-white block mt-1.5">{a.designation}</span>
                     </div>
                     <div>
-                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Onboarding Verification files</span>
-                      <span className="font-semibold text-tata-light block mt-1.5">{a.docs.join(', ')}</span>
+                      <span className="text-[9px] uppercase font-mono tracking-widest text-slate-700 block leading-none">Onboarding Verification files</span>
+                      <span className="font-semibold text-white block mt-1.5">{a.docs.join(', ')}</span>
                     </div>
                   </div>
                 </div>

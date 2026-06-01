@@ -69,11 +69,11 @@ export default function DeptContracts() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">DIVISION CONTRACTS MONITOR</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Active Procurement Contracts
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -82,44 +82,42 @@ export default function DeptContracts() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Side: Contracts Register List */}
         <div className={selectedContract ? 'lg:col-span-2 space-y-4' : 'lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-5'}>
           {contracts.map((contract) => (
             <div
               key={contract.id}
               onClick={() => handleSelectContract(contract)}
-              className={`p-5 bg-steel-800 border rounded-2xl shadow-xl hover:border-tata-blue/45 cursor-pointer flex flex-col justify-between transition-all duration-150 ${
-                selectedContract?.id === contract.id ? 'border-tata-blue ring-1 ring-tata-blue/20' : 'border-steel-700/60'
-              }`}
+              className={`p-5 bg-steel-800 border rounded-2xl shadow-xl hover:border-tata-blue/45 cursor-pointer flex flex-col justify-between transition-all duration-150 ${selectedContract?.id === contract.id ? 'border-tata-blue ring-1 ring-tata-blue/20' : 'border-steel-700/60'
+                }`}
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="px-2 py-0.5 rounded bg-steel-900 border border-steel-700 font-mono font-bold text-[10px] text-tata-gold">
                     {contract.id}
                   </span>
-                  <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${
-                    contract.status === 'Active' 
-                      ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' 
-                      : 'bg-slate-500/15 text-slate-400 border border-steel-600'
-                  }`}>
+                  <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${contract.status === 'Active'
+                    ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
+                    : 'bg-slate-500/15 text-slate-400 border border-steel-600'
+                    }`}>
                     {contract.status}
                   </span>
                 </div>
 
                 <div>
-                  <h3 className="text-sm sm:text-base font-bold text-white leading-snug">{contract.title}</h3>
+                  <h3 className="text-sm sm:text-base font-bold text-slate-900 leading-snug">{contract.title}</h3>
                   <span className="text-[10px] text-slate-500 font-mono block mt-1">Vendor Partner: {contract.vendor}</span>
                 </div>
 
                 <div className="grid grid-cols-2 gap-2.5 p-3 bg-steel-900/30 border border-steel-700/50 rounded-xl text-xs">
                   <div>
-                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500">Contract Value</span>
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-600">Contract Value</span>
                     <span className="block font-bold text-white mt-1">{contract.value}</span>
                   </div>
                   <div>
-                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-500">Signed Date</span>
-                    <span className="block font-semibold text-slate-300 mt-1">{contract.signedDate}</span>
+                    <span className="text-[9px] uppercase font-mono tracking-widest text-slate-600">Signed Date</span>
+                    <span className="block font-semibold text-white mt-1">{contract.signedDate}</span>
                   </div>
                 </div>
               </div>
@@ -143,16 +141,16 @@ export default function DeptContracts() {
         {/* Right Side: Milestones checklist and feedback rating cards */}
         {selectedContract && (
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-6 h-fit animate-slideRight">
-            
+
             <div className="border-b border-steel-700 pb-3 flex items-start justify-between">
               <div>
                 <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">MILESTONE AUDIT & FEEDBACK</span>
-                <h3 className="text-sm font-bold text-white mt-1 leading-none">{selectedContract.id} Review</h3>
+                <h3 className="text-sm font-bold text-slate-600 mt-1 leading-none">{selectedContract.id} Review</h3>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedContract(null)}
-                className="text-xs text-slate-400 hover:text-white font-bold focus:outline-none"
+                className="text-xs text-slate-400 hover:text-black font-bold focus:outline-none"
               >
                 Close detail
               </button>
@@ -167,11 +165,10 @@ export default function DeptContracts() {
                   return (
                     <div
                       key={milestoneIdx}
-                      className={`p-3 rounded-xl border flex items-start space-x-3.5 transition-colors ${
-                        milestone.complete
-                          ? 'bg-emerald-500/5 border-emerald-500/25 text-slate-300'
-                          : 'bg-steel-900/30 border-steel-700 text-slate-400 hover:bg-steel-900/50'
-                      }`}
+                      className={`p-3 rounded-xl border flex items-start space-x-3.5 transition-colors ${milestone.complete
+                        ? 'bg-emerald-500/5 border-emerald-500/25 text-slate-300'
+                        : 'bg-steel-900/30 border-steel-700 text-slate-400 hover:bg-steel-900/50'
+                        }`}
                     >
                       <button
                         type="button"
@@ -186,7 +183,7 @@ export default function DeptContracts() {
                       </button>
 
                       <div className="space-y-1">
-                        <h5 className={`text-xs font-semibold ${milestone.complete ? 'text-white' : 'text-slate-300'}`}>{milestone.label}</h5>
+                        <h5 className={`text-xs font-semibold ${milestone.complete ? 'text-slate-600' : 'text-slate-100'}`}>{milestone.label}</h5>
                         <span className="text-[10px] text-slate-500 font-mono block">Target: {milestone.date}</span>
                       </div>
                     </div>
@@ -198,7 +195,7 @@ export default function DeptContracts() {
             {/* Performance Review section */}
             <div className="pt-4 border-t border-steel-700/60 space-y-3">
               <h4 className="text-[10px] uppercase font-mono tracking-widest text-slate-500">Post-Contract Performance Score Card</h4>
-              
+
               {ratedStatus ? (
                 <div className="p-3 bg-emerald-500/5 border border-emerald-500/20 text-emerald-400 rounded-xl flex items-center space-x-2">
                   <ShieldCheck className="w-4.5 h-4.5 flex-shrink-0" />
@@ -234,7 +231,7 @@ export default function DeptContracts() {
                       onChange={(e) => setRatingNotes(e.target.value)}
                       rows={2.5}
                       placeholder="Comment on material quality, lead compliance, communication punctuality..."
-                      className="block w-full px-3 py-2 rounded-lg bg-steel-900 border border-steel-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-tata-blue resize-none"
+                      className="block w-full px-3 py-2 rounded-lg bg-steel-900 border border-steel-700 text-xs sm:text-sm text-white placeholder-slate-300 focus:outline-none focus:border-tata-blue resize-none"
                     />
                   </div>
 

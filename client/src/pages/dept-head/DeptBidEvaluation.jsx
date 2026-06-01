@@ -56,14 +56,14 @@ export default function DeptBidEvaluation() {
     setModalOpen(false);
     const randomNum = Math.floor(1000 + Math.random() * 9000);
     setContractId(`CON-${randomNum}`);
-    
+
     // Update active bid status locally
     setBids(prev => prev.map(b => b.id === selectedBid.id ? { ...b, status: 'Accepted' } : { ...b, status: 'Rejected' }));
   };
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header action bar */}
       <div className="flex items-center space-x-2 border-b border-steel-700/60 pb-5">
         <button
@@ -75,7 +75,7 @@ export default function DeptBidEvaluation() {
         </button>
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SOURCING SCORE BOARD</span>
-          <h1 className="text-xl sm:text-2xl font-bold text-white mt-0.5">Bid Evaluation & Sourcing: {id}</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">Bid Evaluation & Sourcing: {id}</h1>
         </div>
       </div>
 
@@ -84,7 +84,7 @@ export default function DeptBidEvaluation() {
           <div className="flex items-start space-x-3.5">
             <CheckCircle2 className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
             <div>
-              <h4 className="text-sm font-bold text-white leading-none">Contract Award Completed</h4>
+              <h4 className="text-sm font-bold text-slate-700 leading-none">Contract Award Completed</h4>
               <p className="text-xs text-slate-400 mt-1.5">
                 Tender contract awarded to **{selectedBid?.vendor}**. Procurement contract **{contractId}** drafted.
               </p>
@@ -110,7 +110,7 @@ export default function DeptBidEvaluation() {
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs sm:text-sm">
             <thead>
-              <tr className="border-b border-steel-700 text-slate-400">
+              <tr className="border-b border-steel-700 text-slate-700">
                 <th className="pb-3 font-medium">Bid Reference</th>
                 <th className="pb-3 font-medium">Vendor Partner</th>
                 <th className="pb-3 font-medium text-right">Price Offer</th>
@@ -123,13 +123,13 @@ export default function DeptBidEvaluation() {
             <tbody className="divide-y divide-steel-700">
               {bids.map((bid, idx) => {
                 const combined = getCombinedScore(bid);
-                
+
                 return (
                   <tr key={bid.id} className="hover:bg-steel-900/10">
-                    <td className="py-3.5 font-mono font-bold text-white">{bid.id}</td>
-                    <td className="py-3.5 font-semibold text-slate-200">{bid.vendor}</td>
-                    <td className="py-3.5 font-medium text-white text-right">₹{bid.price.toLocaleString('en-IN')}</td>
-                    <td className="py-3.5 text-center text-slate-300">{bid.days} Days</td>
+                    <td className="py-3.5 font-mono font-bold text-slate-500">{bid.id}</td>
+                    <td className="py-3.5 font-semibold text-slate-500">{bid.vendor}</td>
+                    <td className="py-3.5 font-medium text-slate-500 text-right">₹{bid.price.toLocaleString('en-IN')}</td>
+                    <td className="py-3.5 text-center text-slate-500">{bid.days} Days</td>
                     <td className="py-3.5 text-center">
                       <input
                         type="number"
@@ -175,13 +175,13 @@ export default function DeptBidEvaluation() {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 font-body animate-fadeIn">
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-2xl max-w-md w-full space-y-4">
-            
+
             <div className="flex items-center space-x-2 border-b border-steel-700 pb-3">
               <AlertTriangle className="w-5 h-5 text-tata-gold flex-shrink-0" />
-              <h3 className="text-base font-bold text-white uppercase tracking-wider">Confirm Contract Award</h3>
+              <h3 className="text-base font-bold text-slate-900 uppercase tracking-wider">Confirm Contract Award</h3>
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+            <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-normal">
               Are you sure you want to award this sourcing contract to **{selectedBid?.vendor}**? This action will generate a formal draft contract and notify the selected vendor partner.
             </p>
 
@@ -189,11 +189,11 @@ export default function DeptBidEvaluation() {
               <button
                 onClick={() => setModalOpen(false)}
                 type="button"
-                className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-300 hover:text-white transition-colors focus:outline-none"
+                className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-300 hover:text-black transition-colors focus:outline-none"
               >
                 Cancel
               </button>
-              
+
               <button
                 onClick={handleConfirmAward}
                 type="button"

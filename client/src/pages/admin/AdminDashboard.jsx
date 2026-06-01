@@ -7,7 +7,7 @@ import { Shield, Users, FileText, Vote, Award, ClipboardList } from 'lucide-reac
 import StatCard from '../../components/common/StatCard';
 
 export default function AdminDashboard() {
-  
+
   // Custom SVG Bar Chart: Spend distribution by department (in Lakhs)
   const spendData = [
     { label: 'RAW_MAT', val: 120, height: 'h-[120px]' },
@@ -26,11 +26,11 @@ export default function AdminDashboard() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header Banner */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN CENTRE</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           System Overview & Oversight
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -75,43 +75,43 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Left Side Charts Panel */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* Spend by Department Chart */}
-          <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-5">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold border-b border-steel-700 pb-3">
+          <div className="bg-steel-800 border border-slate-200 rounded-2xl p-5 shadow-sm space-y-5">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold border-b border-slate-100 pb-3">
               Divisional Sourcing Spend (Quarterly in Lakhs)
             </h3>
 
-            <div className="flex justify-around items-end h-48 pt-6 border-b border-steel-700 pb-2 bg-steel-900/40 rounded-xl p-4">
+            <div className="flex justify-around items-end h-48 pt-6 border-b border-slate-200 pb-2 bg-gray-100 rounded-xl p-4">
               {spendData.map((bar, idx) => (
                 <div key={idx} className="flex flex-col items-center group w-14">
                   <span className="text-[10px] font-mono font-bold text-tata-gold opacity-0 group-hover:opacity-100 transition-opacity mb-1">
                     ₹{bar.val}L
                   </span>
                   <div className={`w-8 bg-gradient-to-t from-tata-blue to-tata-light rounded-t-md ${bar.height} transition-all duration-150 hover:brightness-110`} />
-                  <span className="text-[9px] font-bold text-slate-400 mt-2 font-mono">{bar.label}</span>
+                  <span className="text-[9px] font-bold text-slate-500 mt-2 font-mono">{bar.label}</span>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Supplier Tier distribution */}
-          <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-5">
-            <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold border-b border-steel-700 pb-3">
+          <div className="bg-steel-800 border border-slate-200 rounded-2xl p-5 shadow-sm space-y-5">
+            <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold border-b border-slate-100 pb-3">
               Supplier Classification Distribution
             </h3>
 
-            <div className="space-y-4 bg-steel-900/40 border border-steel-700/60 rounded-xl p-4">
+            <div className="space-y-4 bg-slate-50 border border-slate-200 rounded-xl p-4">
               {tierDistribution.map((tier, idx) => (
                 <div key={idx} className="space-y-1.5">
                   <div className="flex justify-between items-center text-xs font-semibold">
-                    <span className="text-slate-300">{tier.label}</span>
-                    <span className="text-white font-mono">{tier.count} Suppliers</span>
+                    <span className="text-slate-600">{tier.label}</span>
+                    <span className="text-slate-800 font-mono">{tier.count} Suppliers</span>
                   </div>
-                  <div className="w-full bg-steel-800 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
                     <div className={`h-full rounded-full ${tier.color} ${tier.percent}`} />
                   </div>
                 </div>
@@ -123,10 +123,10 @@ export default function AdminDashboard() {
 
         {/* Right Side: Approval queues & warnings */}
         <div className="space-y-6">
-          
+
           {/* Approvals count checklist panel */}
-          <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-5">
-            <div className="flex items-center space-x-2 border-b border-steel-700 pb-3">
+          <div className="bg-steel-800 border border-slate-200 rounded-2xl p-5 shadow-sm space-y-5">
+            <div className="flex items-center space-x-2 border-b border-slate-100 pb-3">
               <ClipboardList className="w-4.5 h-4.5 text-tata-gold" />
               <h3 className="text-sm font-bold uppercase tracking-wider text-tata-gold">Approvals Queue</h3>
             </div>
@@ -134,40 +134,40 @@ export default function AdminDashboard() {
             <div className="space-y-3">
               <Link
                 to="/admin/approvals"
-                className="p-3 bg-steel-900 border border-steel-700 hover:border-tata-blue/40 rounded-xl flex items-center justify-between text-xs font-semibold group transition-colors"
+                className="p-3 bg-slate-50 border border-slate-200 hover:border-tata-blue/45 rounded-xl flex items-center justify-between text-xs font-semibold group transition-colors"
               >
-                <span className="text-slate-400">Vendor Registrations:</span>
-                <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 font-mono font-bold border border-orange-500/20">3 Pending</span>
+                <span className="text-slate-500">Vendor Registrations:</span>
+                <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-600 font-mono font-bold border border-orange-500/20">3 Pending</span>
               </Link>
               <Link
                 to="/admin/approvals"
-                className="p-3 bg-steel-900 border border-steel-700 hover:border-tata-blue/40 rounded-xl flex items-center justify-between text-xs font-semibold group transition-colors"
+                className="p-3 bg-slate-50 border border-slate-200 hover:border-tata-blue/45 rounded-xl flex items-center justify-between text-xs font-semibold group transition-colors"
               >
-                <span className="text-slate-400">Dept Head Activations:</span>
-                <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 font-mono font-bold border border-orange-500/20">2 Pending</span>
+                <span className="text-slate-500">Dept Head Activations:</span>
+                <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-600 font-mono font-bold border border-orange-500/20">2 Pending</span>
               </Link>
               <Link
                 to="/admin/approvals"
-                className="p-3 bg-steel-900 border border-steel-700 hover:border-tata-blue/40 rounded-xl flex items-center justify-between text-xs font-semibold group transition-colors"
+                className="p-3 bg-slate-50 border border-slate-200 hover:border-tata-blue/45 rounded-xl flex items-center justify-between text-xs font-semibold group transition-colors"
               >
-                <span className="text-slate-400">Admin Account reviews:</span>
-                <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-400 font-mono font-bold border border-orange-500/20">1 Pending</span>
+                <span className="text-slate-500">Admin Account reviews:</span>
+                <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-600 font-mono font-bold border border-orange-500/20">1 Pending</span>
               </Link>
             </div>
           </div>
 
           {/* Audit quick stats */}
-          <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl text-center space-y-4 flex flex-col items-center">
+          <div className="bg-steel-800 border border-slate-200 rounded-2xl p-5 shadow-sm text-center space-y-4 flex flex-col items-center">
             <Shield className="w-12 h-12 text-tata-gold flex-shrink-0" />
             <div>
-              <h4 className="text-xs font-bold text-slate-300 uppercase tracking-wide">Audit & Operations Ledger</h4>
+              <h4 className="text-xs font-bold text-slate-700 uppercase tracking-wide">Audit & Operations Ledger</h4>
               <p className="text-[10px] text-slate-500 mt-1 leading-relaxed">
                 System events and administrative actions are logged statefully in our centralized compliance auditor database.
               </p>
             </div>
             <Link
               to="/admin/audit-logs"
-              className="w-full py-2 bg-steel-900 border border-steel-700 hover:border-tata-blue/40 text-xs font-bold text-white rounded-xl transition-all"
+              className="w-full py-2 bg-slate-55 hover:bg-slate-100 border border-slate-200 text-xs font-bold text-slate-800 rounded-xl transition-all"
             >
               Inspect Audit Log
             </Link>

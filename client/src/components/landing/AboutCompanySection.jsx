@@ -13,7 +13,7 @@ export default function AboutCompanySection() {
   ];
 
   return (
-    <section id="about" className="bg-white text-slate-700 font-body py-20 sm:py-28 relative">
+    <section id="products" className="bg-white text-slate-700 font-body py-20 sm:py-28 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
@@ -21,7 +21,7 @@ export default function AboutCompanySection() {
           <div className="flex flex-col space-y-6">
             <div className="inline-flex items-center space-x-2 text-xs font-semibold uppercase tracking-wider text-tata-blue">
               <span className="w-6 h-px bg-tata-blue"></span>
-              <span>Our Legacy & Materials</span>
+              <span>Or Legacy & Materials</span>
             </div>
 
             {/* Bebas Neue Title */}

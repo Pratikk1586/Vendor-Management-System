@@ -9,7 +9,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-steel-900 border-t border-steel-700 text-slate-300 font-body">
+    <footer id="contact" className="bg-slate-900 border-t border-steel-700 text-slate-300 font-body">
       {/* Top 4-Column Grid Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
@@ -41,7 +41,7 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/" className="hover:text-tata-gold transition-colors duration-150">
+                <Link to="/home" className="hover:text-tata-gold transition-colors duration-150">
                   Home Page
                 </Link>
               </li>
@@ -105,7 +105,7 @@ export default function Footer() {
                 href="https://www.linkedin.com/company/tata-steel-colors/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-steel-800 hover:bg-tata-blue hover:text-white rounded-lg flex items-center justify-center transition-all duration-200"
+                className="w-10 h-10 bg-slate-700 hover:bg-tata-blue hover:text-white rounded-lg flex items-center justify-center transition-all duration-200"
                 aria-label="LinkedIn"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -117,7 +117,7 @@ export default function Footer() {
                 href="https://www.youtube.com/@TataSteelColors"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-steel-800 hover:bg-red-600 hover:text-white rounded-lg flex items-center justify-center transition-all duration-200"
+                className="w-10 h-10 bg-slate-700 hover:bg-red-600 hover:text-white rounded-lg flex items-center justify-center transition-all duration-200"
                 aria-label="YouTube"
               >
                 <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export default function Footer() {
                 href="https://tatasteelcolors.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-steel-800 hover:bg-tata-gold hover:text-steel-900 rounded-lg flex items-center justify-center transition-all duration-200"
+                className="w-10 h-10 bg-slate-700 hover:bg-tata-gold hover:text-steel-900 rounded-lg flex items-center justify-center transition-all duration-200"
                 aria-label="Website"
               >
                 <Globe className="w-5 h-5" />
@@ -140,7 +140,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Copyright Bar */}
-      <div className="bg-steel-900/60 border-t border-steel-800 py-6">
+      <div className="bg-black py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-3 sm:space-y-0">
           <div>
             Copyright &copy; {currentYear} TATA STEEL COLORS PRIVATE LIMITED. CIN: U45209PN2005PTC020270. All Rights Reserved.

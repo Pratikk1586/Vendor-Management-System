@@ -16,7 +16,7 @@ export default function Sidebar({ navItems = [] }) {
 
   // Format display name
   const displayName = user?.name || user?.username || 'Tata Steel Staff';
-  
+
   // Format role tag
   const formatRole = (roleStr) => {
     if (!roleStr) return 'User';
@@ -27,9 +27,8 @@ export default function Sidebar({ navItems = [] }) {
 
   return (
     <aside
-      className={`hidden md:flex flex-col bg-steel-700 border-r border-steel-600 text-white font-body select-none h-screen sticky top-0 left-0 transition-all duration-300 ease-in-out z-30 ${
-        isCollapsed ? 'w-20' : 'w-64'
-      }`}
+      className={`hidden md:flex flex-col bg-steel-700 border-r border-steel-600 text-white font-body select-none h-screen sticky top-0 left-0 transition-all duration-300 ease-in-out z-30 ${isCollapsed ? 'w-20' : 'w-64'
+        }`}
     >
       {/* Brand Header */}
       <div className="flex items-center justify-between px-4 h-16 sm:h-20 border-b border-steel-600/80">
@@ -40,10 +39,7 @@ export default function Sidebar({ navItems = [] }) {
           {!isCollapsed && (
             <div className="flex flex-col truncate animate-fadeIn">
               <span className="font-display text-base tracking-wider text-white group-hover:text-tata-gold transition-colors duration-200">
-                TATA STEEL
-              </span>
-              <span className="text-[9px] uppercase font-mono tracking-widest text-slate-400">
-                Colors Portal
+                TATA STEEL COLORS
               </span>
             </div>
           )}
@@ -63,7 +59,7 @@ export default function Sidebar({ navItems = [] }) {
             <User className="w-5 h-5 text-slate-300" />
           )}
         </div>
-        
+
         {!isCollapsed && (
           <div className="flex flex-col truncate animate-fadeIn">
             <span className="text-sm font-semibold text-white truncate leading-tight">

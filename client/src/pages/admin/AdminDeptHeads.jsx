@@ -55,7 +55,7 @@ export default function AdminDeptHeads() {
       label: 'Employee Details',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-slate-900">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">{row.email}</span>
         </div>
       ),
@@ -72,9 +72,8 @@ export default function AdminDeptHeads() {
       key: 'status',
       label: 'Account Status',
       render: (val) => (
-        <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${
-          val === 'Active' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
-        }`}>
+        <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider ${val === 'Active' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-orange-500/10 text-orange-400 border border-orange-500/20'
+          }`}>
           {val}
         </span>
       ),
@@ -83,12 +82,12 @@ export default function AdminDeptHeads() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header */}
       <div className="border-b border-steel-700/60 pb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN METRICS</span>
-          <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
             Department Heads Index
           </h1>
           <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -125,15 +124,15 @@ export default function AdminDeptHeads() {
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 font-body animate-fadeIn">
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-2xl max-w-md w-full space-y-4">
-            
+
             <div className="flex items-center space-x-2 border-b border-steel-700 pb-3">
               <UserCheck className="w-5 h-5 text-tata-gold flex-shrink-0" />
-              <h3 className="text-base font-bold text-white uppercase tracking-wider">Provision Dept Head Profile</h3>
+              <h3 className="text-base font-bold text-slate-900 uppercase tracking-wider">Provision Dept Head Profile</h3>
             </div>
 
             <form onSubmit={handleCreateDeptHead} className="space-y-4">
               <div>
-                <label htmlFor="dh-name" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="dh-name" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                   Full Name *
                 </label>
                 <input
@@ -148,7 +147,7 @@ export default function AdminDeptHeads() {
               </div>
 
               <div>
-                <label htmlFor="dh-email" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="dh-email" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                   Official Email *
                 </label>
                 <input
@@ -164,7 +163,7 @@ export default function AdminDeptHeads() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="dh-dept" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label htmlFor="dh-dept" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                     Department *
                   </label>
                   <select
@@ -181,7 +180,7 @@ export default function AdminDeptHeads() {
                 </div>
 
                 <div>
-                  <label htmlFor="dh-des" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                  <label htmlFor="dh-des" className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
                     Designation *
                   </label>
                   <input
@@ -199,11 +198,11 @@ export default function AdminDeptHeads() {
                 <button
                   onClick={() => setModalOpen(false)}
                   type="button"
-                  className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-300 hover:text-white transition-colors focus:outline-none"
+                  className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-800 hover:text-black hover:bg-gray-400 transition-colors focus:outline-none"
                 >
                   Cancel
                 </button>
-                
+
                 <button
                   type="submit"
                   className="py-2 px-5 rounded-xl bg-gradient-to-r from-tata-blue to-tata-light text-xs font-bold text-white transition-all focus:outline-none flex items-center"

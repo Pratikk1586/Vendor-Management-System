@@ -32,14 +32,14 @@ export default function VendorMyBids() {
     {
       key: 'id',
       label: 'Bid Ref',
-      render: (val) => <span className="font-mono font-bold text-white">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-gray-800">{val}</span>,
     },
     {
       key: 'title',
       label: 'Sourcing Opportunity / Dept',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-slate-800">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">{row.dept} | Ref: {row.tenderId}</span>
         </div>
       ),
@@ -47,7 +47,7 @@ export default function VendorMyBids() {
     {
       key: 'price',
       label: 'Proposed Price',
-      render: (val) => <span className="font-semibold text-white">{val}</span>,
+      render: (val) => <span className="font-semibold text-gray-800">{val}</span>,
     },
     {
       key: 'date',
@@ -65,7 +65,7 @@ export default function VendorMyBids() {
         <button
           onClick={() => navigate(`/vendor/bids/${row.id}`)}
           type="button"
-          className="py-1 px-2.5 rounded bg-steel-700 hover:bg-tata-blue/20 text-[11px] font-bold text-slate-300 hover:text-white border border-steel-600 hover:border-tata-blue/45 flex items-center space-x-1 transition-all focus:outline-none"
+          className="py-1 px-2.5 rounded bg-white hover:bg-slate-400 text-[11px] font-bold text-black hover:text-white border border-steel-600 hover:border-tata-blue/45 flex items-center space-x-1 transition-all focus:outline-none"
         >
           <Eye className="w-3.5 h-3.5" />
           <span>Inspect</span>
@@ -76,14 +76,14 @@ export default function VendorMyBids() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">PROPOSAL PORTFOLIO</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           My Submitted Bids
         </h1>
-        <p className="text-xs sm:text-sm text-slate-400 font-normal">
+        <p className="text-xs sm:text-sm text-gray-500 font-normal">
           View evaluation logs, auditor remarks, and commercial rankings for submitted bids.
         </p>
       </div>

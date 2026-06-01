@@ -43,11 +43,11 @@ export default function AdminDepartments() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN OVERVIEW</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Divisional Segments Index
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -66,7 +66,7 @@ export default function AdminDepartments() {
         {departments.map((dept) => (
           <div
             key={dept.id}
-            className="bg-steel-800 border border-steel-700/60 hover:border-tata-blue/40 rounded-2xl p-5 shadow-xl flex flex-col justify-between group transition-colors duration-150"
+            className="bg-steel-800 border border-tata-blue/40 hover:border-steel-700/60 rounded-2xl p-5 shadow-xl flex flex-col justify-between group transition-colors duration-150"
           >
             <div className="space-y-3.5">
               <div className="flex items-center justify-between">
@@ -79,7 +79,7 @@ export default function AdminDepartments() {
               </div>
 
               <div>
-                <h3 className="text-base font-bold text-white leading-snug group-hover:text-tata-light transition-colors">
+                <h3 className="text-base font-bold text-black leading-snug group-hover:text-tata-light transition-colors">
                   {dept.name}
                 </h3>
               </div>
@@ -116,20 +116,20 @@ export default function AdminDepartments() {
       {modalOpen && selectedDept && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 font-body animate-fadeIn">
           <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-6 shadow-2xl max-w-md w-full space-y-4">
-            
+
             <div className="flex items-center space-x-2 border-b border-steel-700 pb-3">
               <UserCheck className="w-5 h-5 text-tata-gold flex-shrink-0" />
-              <h3 className="text-base font-bold text-white uppercase tracking-wider">Assign Departmental Head</h3>
+              <h3 className="text-base font-bold text-black uppercase tracking-wider">Assign Departmental Head</h3>
             </div>
 
             <form onSubmit={handleAssignSubmit} className="space-y-4">
               <div>
                 <span className="text-[10px] uppercase font-mono tracking-widest text-slate-500 block leading-none">Target Division</span>
-                <span className="text-sm font-bold text-white block mt-2">{selectedDept.name} ({selectedDept.code})</span>
+                <span className="text-sm font-bold text-black block mt-2">{selectedDept.name} ({selectedDept.code})</span>
               </div>
 
               <div>
-                <label htmlFor="assignee-select" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+                <label htmlFor="assignee-select" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
                   Select Registered Sourcing Manager *
                 </label>
                 <select
@@ -152,11 +152,11 @@ export default function AdminDepartments() {
                 <button
                   onClick={() => setModalOpen(false)}
                   type="button"
-                  className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-300 hover:text-white transition-colors focus:outline-none"
+                  className="py-2 px-4 rounded-xl border border-steel-600 bg-steel-800 text-xs font-bold text-slate-900 hover:text-black hover:bg-gray-300 transition-colors focus:outline-none"
                 >
                   Cancel
                 </button>
-                
+
                 <button
                   type="submit"
                   className="py-2 px-5 rounded-xl bg-gradient-to-r from-tata-blue to-tata-light text-xs font-bold text-white transition-all focus:outline-none"

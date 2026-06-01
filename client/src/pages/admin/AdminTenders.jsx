@@ -24,7 +24,7 @@ export default function AdminTenders() {
         const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
         dateObj.setDate(dateObj.getDate() + 7);
         const newDeadline = dateObj.toISOString().split('T')[0];
-        
+
         return { ...t, deadline: newDeadline };
       }
       return t;
@@ -59,14 +59,14 @@ export default function AdminTenders() {
     {
       key: 'id',
       label: 'Tender Ref',
-      render: (val) => <span className="font-mono font-bold text-white">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-black">{val}</span>,
     },
     {
       key: 'title',
       label: 'Procurement Title / Department',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-slate-600">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">{row.dept}</span>
         </div>
       ),
@@ -79,7 +79,7 @@ export default function AdminTenders() {
     {
       key: 'deadline',
       label: 'Submission due',
-      render: (val) => <span className="font-mono text-slate-300">{val}</span>,
+      render: (val) => <span className="font-mono text-slate-500">{val}</span>,
     },
     {
       key: 'status',
@@ -101,7 +101,7 @@ export default function AdminTenders() {
                 <Calendar className="w-3.5 h-3.5 text-tata-gold" />
                 <span>Extend Due (+7d)</span>
               </button>
-              
+
               <button
                 onClick={() => handleCancelTender(row.id)}
                 type="button"
@@ -125,11 +125,11 @@ export default function AdminTenders() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN METRICS</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Procurement Tenders Oversight
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">

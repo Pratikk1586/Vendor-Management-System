@@ -68,15 +68,15 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-body">
-      <div className="max-w-4xl w-full space-y-8 flex flex-col items-center">
-        
+    <div className="flex-grow flex items-center justify-center py-20 px-4 sm:px-6 lg:px-8 font-body">
+      <div className="max-w-6xl w-full space-y-8 flex flex-col items-center">
+
         {/* Core Tata Logo Header */}
         <div className="flex flex-col items-center">
-          <div className="w-14 h-14 bg-gradient-to-br from-tata-gold to-tata-amber rounded-2xl flex items-center justify-center font-display text-2xl text-steel-900 font-extrabold shadow-lg shadow-tata-gold/10 mb-3 flex-shrink-0">
+          {/* <div className="w-14 h-14 bg-gradient-to-br from-tata-gold to-tata-amber rounded-2xl flex items-center justify-center font-display text-2xl text-steel-900 font-extrabold shadow-lg shadow-tata-gold/10 mb-3 flex-shrink-0">
             TS
-          </div>
-          <h1 className="text-xl font-display tracking-widest text-white uppercase text-center">
+          </div> */}
+          <h1 className="text-xl font-display tracking-widest text-blue uppercase text-center">
             Tata Steel Colors
           </h1>
           <span className="text-[10px] uppercase font-mono tracking-widest text-slate-400">

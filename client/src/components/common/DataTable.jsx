@@ -43,7 +43,7 @@ export default function DataTable({
               <th
                 key={col.key}
                 className={clsx(
-                  'px-4 py-3 font-medium text-gray-300',
+                  'px-4 py-3 font-medium text-slate-800',
                   col.sortable && 'cursor-pointer select-none hover:text-white',
                 )}
                 onClick={() => col.sortable && onSort?.(col.key)}
@@ -62,7 +62,7 @@ export default function DataTable({
           {data.map((row, rowIndex) => (
             <tr key={row._id || row.id || rowIndex} className="hover:bg-steel-800/50">
               {columns.map((col) => (
-                <td key={col.key} className="px-4 py-3 text-gray-300">
+                <td key={col.key} className="px-4 py-3 text-gray-800">
                   {col.render ? col.render(row[col.key], row) : row[col.key]}
                 </td>
               ))}

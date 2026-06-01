@@ -85,14 +85,14 @@ export default function AdminMembers() {
     {
       key: 'id',
       label: 'ID Ref',
-      render: (val) => <span className="font-mono font-bold text-white">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-gray-500">{val}</span>,
     },
     {
       key: 'name',
       label: 'Profile Details',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-balck">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">{row.email}</span>
         </div>
       ),
@@ -114,7 +114,7 @@ export default function AdminMembers() {
         <button
           onClick={() => navigate(`/admin/members/${row.id}`)}
           type="button"
-          className="py-1 px-2.5 rounded bg-steel-700 hover:bg-tata-blue/20 text-[11px] font-bold text-slate-300 hover:text-white border border-steel-600 hover:border-tata-blue/45 flex items-center space-x-1 transition-all focus:outline-none"
+          className="py-1 px-2.5 rounded bg-steel-700 hover:bg-tata-blue/20 text-[11px] font-bold text-slate-300 hover:text-black border border-steel-600 hover:border-tata-blue/45 flex items-center space-x-1 transition-all focus:outline-none"
         >
           <Eye className="w-3.5 h-3.5" />
           <span>Manage Profile</span>
@@ -132,11 +132,11 @@ export default function AdminMembers() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">MEMBERSHIP DIRECTORY</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Master User Management
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -158,7 +158,7 @@ export default function AdminMembers() {
 
       {/* Bulk Action Bar */}
       {selectedIds.length > 0 && (
-        <div className="p-3 bg-steel-950 border border-steel-700 text-slate-300 rounded-xl flex items-center justify-between text-xs font-semibold animate-fadeIn">
+        <div className="p-3 bg-steel-950 border border-steel-700 text-slate-600 rounded-xl flex items-center justify-between text-xs font-semibold animate-fadeIn">
           <span>{selectedIds.length} members selected for bulk operations:</span>
           <div className="flex space-x-2">
             <button

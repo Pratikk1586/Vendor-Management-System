@@ -78,7 +78,7 @@ export default function DeptTenderCreate() {
           <CheckCircle2 className="w-8 h-8 text-emerald-400" />
         </div>
 
-        <h2 className="text-xl sm:text-2xl font-bold text-white mb-2 uppercase tracking-wide">
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-800 mb-2 uppercase tracking-wide">
           Sourcing Tender Published
         </h2>
         <span className="text-xs text-tata-gold font-mono uppercase tracking-widest">
@@ -98,11 +98,11 @@ export default function DeptTenderCreate() {
           <button
             onClick={() => navigate('/dept/tenders')}
             type="button"
-            className="flex-1 py-2.5 rounded-xl border border-steel-600 bg-steel-800 hover:bg-steel-700 text-xs sm:text-sm font-semibold text-slate-300 transition-colors focus:outline-none"
+            className="flex-1 py-2.5 rounded-xl border border-steel-600 bg-steel-800 hover:bg-steel-700 hover:text-white text-xs sm:text-sm font-semibold text-slate-500 transition-colors focus:outline-none"
           >
             Go to Tenders list
           </button>
-          
+
           <button
             onClick={() => {
               setSuccess(false);
@@ -126,7 +126,7 @@ export default function DeptTenderCreate() {
 
   return (
     <div className="space-y-6 font-body max-w-4xl mx-auto">
-      
+
       {/* Detail Header Action Bar */}
       <div className="flex items-center space-x-2 border-b border-steel-700/60 pb-5">
         <button
@@ -138,12 +138,12 @@ export default function DeptTenderCreate() {
         </button>
         <div>
           <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">DIVISION AUTHORING</span>
-          <h1 className="text-xl sm:text-2xl font-bold text-white mt-0.5">Author Procurement Tender</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900 mt-0.5">Author Procurement Tender</h1>
         </div>
       </div>
 
       <form onSubmit={handleCreateSubmit} className="space-y-6">
-        
+
         {/* Step 1: Base Specs */}
         <div className="bg-steel-800 border border-steel-700/60 rounded-2xl p-5 shadow-xl space-y-4">
           <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold border-b border-steel-700 pb-2">
@@ -152,7 +152,7 @@ export default function DeptTenderCreate() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="sm:col-span-2">
-              <label htmlFor="tender-title" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="tender-title" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
                 Tender Title *
               </label>
               <input
@@ -162,12 +162,12 @@ export default function DeptTenderCreate() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g. 150 Metric Tons Hot-Rolled Coils supply"
-                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
+                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900/30  border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="tender-budget" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="tender-budget" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
                 Target Budget (INR) *
               </label>
               <input
@@ -177,12 +177,12 @@ export default function DeptTenderCreate() {
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
                 placeholder="e.g. 5000000"
-                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
+                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900/30  border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
               />
             </div>
 
             <div>
-              <label htmlFor="tender-deadline" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="tender-deadline" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
                 Submission Closing Deadline *
               </label>
               <input
@@ -191,12 +191,12 @@ export default function DeptTenderCreate() {
                 required
                 value={deadline}
                 onChange={(e) => setDeadline(e.target.value)}
-                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
+                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900/30  border border-steel-700/80 text-white placeholder-slate-500 text-sm focus:outline-none focus:border-tata-blue transition-colors"
               />
             </div>
 
             <div className="sm:col-span-2">
-              <label htmlFor="tender-desc" className="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">
+              <label htmlFor="tender-desc" className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">
                 Materials Scope and Description Overview *
               </label>
               <textarea
@@ -206,7 +206,7 @@ export default function DeptTenderCreate() {
                 onChange={(e) => setDescription(e.target.value)}
                 rows={3}
                 placeholder="Describe material dimensions, tolerances, chemical composition requirements, factory destination, etc..."
-                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900 border border-steel-700/80 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-tata-blue transition-colors resize-none"
+                className="block w-full px-4 py-2.5 rounded-xl bg-steel-900/30 border border-steel-700/80 text-white placeholder-slate-500 text-xs sm:text-sm focus:outline-none focus:border-tata-blue transition-colors resize-none"
               />
             </div>
           </div>
@@ -222,10 +222,10 @@ export default function DeptTenderCreate() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4 bg-steel-900/40 border border-steel-700/50 rounded-xl">
-            
+
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wide">
-                <span className="text-slate-300">Technical Scoring *</span>
+                <span className="text-slate-700">Technical Scoring *</span>
                 <span className="text-tata-gold font-mono">{techWeight}%</span>
               </div>
               <input
@@ -234,16 +234,16 @@ export default function DeptTenderCreate() {
                 max="100"
                 value={techWeight}
                 onChange={(e) => handleTechChange(e.target.value)}
-                className="w-full h-1.5 rounded-full bg-steel-800 appearance-none cursor-pointer accent-tata-blue"
+                className="w-full h-1.5 rounded-full bg-white appearance-none cursor-pointer accent-tata-blue"
               />
-              <span className="text-[10px] text-slate-500 font-normal leading-relaxed block">
+              <span className="text-[10px] text-slate-700 font-normal leading-relaxed block">
                 Determines compliance value for ISO certs, tolerances, sample tests, and capacity thresholds.
               </span>
             </div>
 
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs font-bold uppercase tracking-wide">
-                <span className="text-slate-300">Commercial / Price Scoring *</span>
+                <span className="text-slate-700">Commercial / Price Scoring *</span>
                 <span className="text-tata-gold font-mono">{commWeight}%</span>
               </div>
               <input
@@ -254,7 +254,7 @@ export default function DeptTenderCreate() {
                 onChange={(e) => handleCommChange(e.target.value)}
                 className="w-full h-1.5 rounded-full bg-steel-800 appearance-none cursor-pointer accent-tata-blue"
               />
-              <span className="text-[10px] text-slate-500 font-normal leading-relaxed block">
+              <span className="text-[10px] text-slate-700 font-normal leading-relaxed block">
                 Determines rating weight assigned to bid price and delivery timelines.
               </span>
             </div>
@@ -268,11 +268,11 @@ export default function DeptTenderCreate() {
             <h3 className="text-xs font-bold uppercase tracking-wider text-tata-gold">
               Tender Specifications Items Builder
             </h3>
-            
+
             <button
               onClick={handleAddSpec}
               type="button"
-              className="py-1 px-2.5 rounded bg-steel-700 hover:bg-steel-600 text-[10px] font-bold text-white border border-steel-600 transition-colors focus:outline-none"
+              className="py-1 px-2.5 rounded bg-steel-600 hover:bg-steel-900 text-[10px] font-bold text-white border border-steel-600 transition-colors focus:outline-none"
             >
               Add Spec Field
             </button>
@@ -287,7 +287,7 @@ export default function DeptTenderCreate() {
                   value={spec}
                   onChange={(e) => handleSpecChange(idx, e.target.value)}
                   placeholder="e.g. Thickness tolerance ±0.05 mm"
-                  className="block flex-grow px-3 py-2 rounded-lg bg-steel-900 border border-steel-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-tata-blue"
+                  className="block flex-grow px-3 py-2 rounded-lg bg-steel-900/30 border border-steel-700 text-xs sm:text-sm text-white placeholder-slate-500 focus:outline-none focus:border-tata-blue"
                 />
               </div>
             ))}
@@ -306,11 +306,11 @@ export default function DeptTenderCreate() {
           <button
             onClick={() => navigate('/dept/tenders')}
             type="button"
-            className="py-2.5 px-6 rounded-xl border border-steel-600 bg-steel-800 hover:bg-steel-700 text-xs sm:text-sm font-semibold text-slate-300 transition-colors focus:outline-none"
+            className="py-2.5 px-6 rounded-xl border border-steel-600 bg-steel-800 hover:bg-steel-700 hover:text-white text-xs sm:text-sm font-semibold text-slate-500 transition-colors focus:outline-none"
           >
             Cancel
           </button>
-          
+
           <button
             type="submit"
             disabled={loading}

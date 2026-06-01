@@ -45,7 +45,7 @@ export default function AdminContracts() {
   };
 
   const getStatusBadge = (status) => {
-    return status === 'Active' 
+    return status === 'Active'
       ? <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Active</span>
       : <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-slate-500/10 text-slate-400 border border-steel-600">Completed</span>;
   };
@@ -54,14 +54,14 @@ export default function AdminContracts() {
     {
       key: 'id',
       label: 'Contract Ref',
-      render: (val) => <span className="font-mono font-bold text-white">{val}</span>,
+      render: (val) => <span className="font-mono font-bold text-black">{val}</span>,
     },
     {
       key: 'title',
       label: 'Contract Sourcing Details / Partner',
       render: (val, row) => (
         <div>
-          <span className="block font-semibold text-slate-200">{val}</span>
+          <span className="block font-semibold text-slate-700">{val}</span>
           <span className="text-[10px] text-slate-500 font-mono">Vendor: {row.vendor}</span>
         </div>
       ),
@@ -88,11 +88,11 @@ export default function AdminContracts() {
 
   return (
     <div className="space-y-6 font-body">
-      
+
       {/* Page Header */}
       <div className="border-b border-steel-700/60 pb-5">
         <span className="text-[10px] uppercase font-mono tracking-widest text-tata-gold">SUPER ADMIN METRICS</span>
-        <h1 className="text-2xl sm:text-3xl font-bold text-white mt-1">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 mt-1">
           Contracts Oversight & Ledger
         </h1>
         <p className="text-xs sm:text-sm text-slate-400 font-normal">
@@ -108,7 +108,7 @@ export default function AdminContracts() {
 
       {/* Contract Pending Co-signature Card */}
       {pendingContract && (
-        <div className="p-5 bg-gradient-to-br from-steel-800 to-steel-900 border border-tata-gold/20 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-5 animate-fadeIn">
+        <div className="p-5 bg-steel-900 border border-tata-gold/20 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-5 animate-fadeIn">
           <div className="space-y-3.5">
             <div className="flex items-center space-x-2">
               <span className="px-2 py-0.5 rounded bg-tata-gold/15 text-tata-gold border border-tata-gold/20 font-mono font-bold text-[10px]">{pendingContract.id}</span>
